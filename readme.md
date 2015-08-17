@@ -1,6 +1,6 @@
 Chart module for docxtemplater.
 
-this module is not ready yet, contact me if you want to help me with this
+this module is not ready yet, contact me on gnomdan@yandex.ru or @prog666 in telegram if you want to help me with this
 
 # Installation:
 
