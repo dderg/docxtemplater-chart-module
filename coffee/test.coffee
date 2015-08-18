@@ -1,8 +1,8 @@
-fs=require('fs')
-DocxGen=require('docxtemplater')
-expect=require('chai').expect
+fs = require('fs')
+DocxGen = require('docxtemplater')
+expect = require('chai').expect
 
-fileNames=[
+fileNames = [
 	'chartExample.docx'
 ]
 
@@ -24,8 +24,8 @@ for name in fileNames
 	docX[name]=new DocxGen()
 	docX[name].loadedContent=content
 
-describe 'chart adding with {$ chart} syntax', ()->
-	it 'shuld try to work', () ->
+describe 'single chart adding with {$ chart} syntax', ()->
+	it 'should add relationship', () ->
 		name = 'chartExample.docx'
 		chartModule = new ChartModule()
 		docX[name].attachModule(chartModule)
@@ -36,7 +36,15 @@ describe 'chart adding with {$ chart} syntax', ()->
 			})
 			.render()
 		zip = out.getZip()
+		relsFile = zip.files['word/_rels/document.xml.rels']
+		expect(relsFile?).to.equal(true)
+		relsFileContent = relsFile.asText()
+		expect(relsFileContent).to.equal("""
+			<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
+			<Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart"/></Relationships>
+		""")
 		fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
+
 	# it 'should work with one image',()->
 	# 	name='imageExample.docx'
 	# 	imageModule=new ImageModule({centered:false})

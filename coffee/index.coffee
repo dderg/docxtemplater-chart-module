@@ -1,6 +1,7 @@
-SubContent=require('docxtemplater').SubContent
+SubContent = require('docxtemplater').SubContent
+ChartManager = require('./chartManager')
 
-fs=require('fs')
+fs = require('fs')
 
 class ChartModule
 	###*
@@ -19,9 +20,15 @@ class ChartModule
 
 	handleEvent: (event, eventData) ->
 		console.log('handleEvent event: ' + event);
-		console.log('handleEvent eventData: ' + eventData);
 		if (event == 'rendering-file')
-			@createChart(eventData)
+			renderingFileName = eventData;
+			console.log(renderingFileName)
+			gen = @manager.getInstance('gen');
+			@chartManager = new ChartManager(gen.zip, renderingFileName)
+			@chartManager.loadChartRels();
+			
+		else if (event == 'rendered')
+			@finished()
 
 	get: (data) ->
 		console.log('get data: ' + data);
@@ -34,24 +41,35 @@ class ChartModule
 	
 	handle: (type, data) ->
 		if (type == 'replaceTag' and data == @name)
+			console.log('handle')
 			@replaceTag()
 		return null
 	
 	finished: () ->
+		console.log('finished')
 
 	on: (event, data) ->
-		console.log('on event: ' + event);
-		console.log('on data: ' + data);
 		if event == 'error'
 			throw data
 
 	replaceTag: () ->
 		console.log('replacing tag');
+		scopeManager = @manager.getInstance('scopeManager')
+		templaterState = @manager.getInstance('templaterState')
 
-	createChart: (eventData) ->
-		renderingFileName = eventData;
-		gen = @manager.getInstance('gen');
-		console.log(gen.zip);
-	
+		tag = templaterState.textInsideTag.substr(1)
+		chartData = scopeManager.getValueFromScope(tag)
+		console.log('tag: ' + tag)
+
+
+		imageRels = @chartManager.loadChartRels()
+		console.log('imageRels: ' + imageRels)
+		
+		return unless imageRels
+		@chartManager.addChartRels(tag)
+		
+		# tagXml = @manager.getInstance('xmlTemplater').tagXml
+
+
 
 module.exports = ChartModule

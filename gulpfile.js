@@ -6,7 +6,7 @@ var uglify= require('gulp-uglify');
 var config={uglify:false}
 
 var paths = {
-	coffee: ['coffee/subContent.coffee','coffee/docxQrCode.coffee','coffee/xmlUtil.coffee','coffee/docUtils.coffee','coffee/imgManager.coffee','coffee/imgReplacer.coffee','coffee/index.coffee'],
+	coffee: ['coffee/docUtils.coffee','coffee/chartManager.coffee','coffee/index.coffee'],
 	coffeeTest: ['coffee/test.coffee'],
 	testDirectory:__dirname+'/test',
     js:'js/'
