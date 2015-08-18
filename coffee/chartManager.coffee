@@ -43,7 +43,7 @@ module.exports = class ChartManager
 			newTag.namespaceURI = null
 			newTag.setAttribute('Id', "rId#{@maxRid}")
 			newTag.setAttribute('Type', 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart')
-			newTag.setAttribute('Target', "charts/#{chartName}")
+			newTag.setAttribute('Target', "charts/#{chartName}.xml")
 			relationships.appendChild(newTag)
 
 		console.log('addChartRels')
