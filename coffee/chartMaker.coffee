@@ -79,7 +79,7 @@ module.exports = class ChartMaker
 						<c:f>Лист1!$A$2:$A$5
 						</c:f>
 						<c:strCache>
-							<c:ptCount val="4"/>
+							<c:ptCount val="#{line.data.length}"/>
 		"""
 		for elem, i in line.data
 			result += """
@@ -98,7 +98,7 @@ module.exports = class ChartMaker
 						</c:f>
 						<c:numCache>
 							<c:formatCode>General</c:formatCode>
-							<c:ptCount val="4"/>
+							<c:ptCount val="#{line.data.length}"/>
 		"""
 		for elem, i in line.data
 			result += """
