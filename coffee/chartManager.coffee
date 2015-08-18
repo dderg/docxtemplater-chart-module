@@ -38,19 +38,21 @@ module.exports = class ChartManager
 		console.log('name: ' + chartName)
 		return unless @relsLoaded
 		@maxRid++
-		@_addRelationship(chartName);
+		@_addChartRelationship(@maxRid, chartName);
 
 		@zip.file(@filePath, DocUtils.encode_utf8(DocUtils.xml2Str(@xmlDoc)), {})
 		return @maxRid
 
 	###*
 	 * add relationship tag to relationships
+	 * @param {Number} id   relationship ID
+	 * @param {String} name target file name
 	###
-	_addRelationship: (name) ->
+	_addChartRelationship: (id, name) ->
 		relationships = @xmlDoc.getElementsByTagName("Relationships")[0]
 		newTag = @xmlDoc.createElement('Relationship')
 		newTag.namespaceURI = null
-		newTag.setAttribute('Id', "rId#{@maxRid}")
+		newTag.setAttribute('Id', "rId#{id}")
 		newTag.setAttribute('Type', 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart')
 		newTag.setAttribute('Target', "charts/#{name}.xml")
 		relationships.appendChild(newTag)
