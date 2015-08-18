@@ -11,48 +11,6 @@ module.exports = class ChartMaker
 						<c:lineChart>
 							<c:grouping val="standard"/>
 		"""
-	getTemplateBottom: () ->
-		return """
-							<c:marker val="1"/>
-							<c:axId val="142309248"/>
-							<c:axId val="142310784"/>
-						</c:lineChart>
-						<c:catAx>
-							<c:axId val="142309248"/>
-							<c:scaling>
-								<c:orientation val="minMax"/>
-							</c:scaling>
-							<c:axPos val="b"/>
-							<c:tickLblPos val="nextTo"/>
-							<c:crossAx val="142310784"/>
-							<c:crosses val="autoZero"/>
-							<c:auto val="1"/>
-							<c:lblAlgn val="ctr"/>
-							<c:lblOffset val="100"/>
-						</c:catAx>
-						<c:valAx>
-							<c:axId val="142310784"/>
-							<c:scaling>
-								<c:orientation val="minMax"/>
-							</c:scaling>
-							<c:axPos val="l"/>
-							<c:majorGridlines/>
-							<c:numFmt formatCode="General" sourceLinked="1"/>
-							<c:tickLblPos val="nextTo"/>
-							<c:crossAx val="142309248"/>
-							<c:crosses val="autoZero"/>
-							<c:crossBetween val="between"/>
-						</c:valAx>
-					</c:plotArea>
-					<c:legend>
-						<c:legendPos val="r"/>
-						<c:layout/>
-					</c:legend>
-					<c:plotVisOnly val="1"/>
-				</c:chart>
-				<c:externalData r:id="rId1"/>
-			</c:chartSpace>
-		"""
 	getLineTemplate: (line) ->
 		result = """
 			<c:ser>
@@ -113,6 +71,47 @@ module.exports = class ChartMaker
 			</c:ser>
 		"""
 		return result
+	getTemplateBottom: () ->
+		return """
+							<c:marker val="1"/>
+							<c:axId val="142309248"/>
+							<c:axId val="142310784"/>
+						</c:lineChart>
+						<c:catAx>
+							<c:axId val="142309248"/>
+							<c:scaling>
+								<c:orientation val="minMax"/>
+							</c:scaling>
+							<c:axPos val="b"/>
+							<c:tickLblPos val="nextTo"/>
+							<c:crossAx val="142310784"/>
+							<c:crosses val="autoZero"/>
+							<c:auto val="1"/>
+							<c:lblAlgn val="ctr"/>
+							<c:lblOffset val="100"/>
+						</c:catAx>
+						<c:valAx>
+							<c:axId val="142310784"/>
+							<c:scaling>
+								<c:orientation val="minMax"/>
+							</c:scaling>
+							<c:axPos val="l"/>
+							<c:majorGridlines/>
+							<c:numFmt formatCode="General" sourceLinked="1"/>
+							<c:tickLblPos val="nextTo"/>
+							<c:crossAx val="142309248"/>
+							<c:crosses val="autoZero"/>
+							<c:crossBetween val="between"/>
+						</c:valAx>
+					</c:plotArea>
+					<c:legend>
+						<c:legendPos val="r"/>
+						<c:layout/>
+					</c:legend>
+					<c:plotVisOnly val="1"/>
+				</c:chart>
+			</c:chartSpace>
+		"""
 	constructor: (@zip) ->
 			
 

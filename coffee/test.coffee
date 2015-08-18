@@ -251,7 +251,6 @@ describe 'adding with {$ chart} syntax', ()->
 					</c:legend>
 					<c:plotVisOnly val="1"/>
 				</c:chart>
-				<c:externalData r:id="rId1"/>
 			</c:chartSpace>
 		""")
 
