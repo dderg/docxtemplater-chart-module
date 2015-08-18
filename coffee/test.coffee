@@ -24,18 +24,64 @@ for name in fileNames
 	docX[name]=new DocxGen()
 	docX[name].loadedContent=content
 
-describe 'single chart adding with {$ chart} syntax', ()->
-	it 'should add relationship', () ->
-		name = 'chartExample.docx'
-		chartModule = new ChartModule()
-		docX[name].attachModule(chartModule)
-		out = docX[name]
-			.load(docX[name].loadedContent)
-			.setData({
-				chart: 'exampleData'
-			})
-			.render()
-		zip = out.getZip()
+describe 'adding with {$ chart} syntax', ()->
+	name = 'chartExample.docx'
+	chartModule = new ChartModule()
+	docX[name].attachModule(chartModule)
+	out = docX[name]
+		.load(docX[name].loadedContent)
+		.setData({
+			chart: {
+				lines: [
+					{
+						name: 'Ряд 1',
+						data: [
+							{
+								x: 'Категория 1',
+								y: '2'
+							},
+							{
+								x: 'Категория 2',
+								y: '3'
+							},
+							{
+								x: 'Категория 3',
+								y: '1'
+							},
+							{
+								x: 'Категория 4',
+								y: '6'
+							}
+						]
+					},
+					{
+						name: 'Ряд 2',
+						data: [
+							{
+								x: 'Категория 1',
+								y: '2.5'
+							},
+							{
+								x: 'Категория 2',
+								y: '2'
+							},
+							{
+								x: 'Категория 3',
+								y: '1.5'
+							},
+							{
+								x: 'Категория 4',
+								y: '1'
+							}
+						]
+					}
+				]
+			}
+		})
+		.render()
+	zip = out.getZip()
+
+	it 'should create relationship in rels file', () ->
 		relsFile = zip.files['word/_rels/document.xml.rels']
 		expect(relsFile?).to.equal(true)
 		relsFileContent = relsFile.asText()
@@ -43,7 +89,174 @@ describe 'single chart adding with {$ chart} syntax', ()->
 			<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
 			<Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart.xml"/></Relationships>
 		""")
-		fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
+
+	it 'should create chart file', () ->
+		chartFile = zip.files['charts/chart.xml']
+		expect(chartFile?).to.equal(true)
+		chartFileContent = chartFile.asText()
+		expect(chartFileContent).to.equal("""
+			<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+			<c:chartSpace xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+				<c:lang val="ru-RU"/>
+				<c:chart>
+					<c:plotArea>
+						<c:layout/>
+						<c:lineChart>
+							<c:grouping val="standard"/><c:ser>
+				<c:idx val="0"/>
+				<c:order val="0"/>
+				<c:tx>
+					<c:strRef>
+						<c:f>ÐÐ¸ÑÑ1!$B$1
+						</c:f>
+						<c:strCache>
+							<c:ptCount val="1"/>
+							<c:pt idx="0">
+								<c:v>Ð ÑÐ´ 1
+								</c:v>
+							</c:pt>
+						</c:strCache>
+					</c:strRef>
+				</c:tx>
+				<c:marker>
+					<c:symbol val="none"/>
+				</c:marker>
+				<c:cat>
+					<c:strRef>
+						<c:f>ÐÐ¸ÑÑ1!$A$2:$A$5
+						</c:f>
+						<c:strCache>
+							<c:ptCount val="4"/><c:pt idx="0">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 1
+				</c:v>
+			</c:pt><c:pt idx="1">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 2
+				</c:v>
+			</c:pt><c:pt idx="2">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 3
+				</c:v>
+			</c:pt><c:pt idx="3">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 4
+				</c:v>
+			</c:pt>		</c:strCache>
+				</c:strRef>
+			</c:cat>
+			<c:val>
+				<c:numRef>
+					<c:f>ÐÐ¸ÑÑ1!$B$2:$B$5
+					</c:f>
+					<c:numCache>
+						<c:formatCode>General</c:formatCode>
+						<c:ptCount val="4"/><c:pt idx="0">
+				<c:v>2</c:v>
+			</c:pt><c:pt idx="1">
+				<c:v>3</c:v>
+			</c:pt><c:pt idx="2">
+				<c:v>1</c:v>
+			</c:pt><c:pt idx="3">
+				<c:v>6</c:v>
+			</c:pt>			</c:numCache>
+					</c:numRef>
+				</c:val>
+			</c:ser><c:ser>
+				<c:idx val="0"/>
+				<c:order val="0"/>
+				<c:tx>
+					<c:strRef>
+						<c:f>ÐÐ¸ÑÑ1!$B$1
+						</c:f>
+						<c:strCache>
+							<c:ptCount val="1"/>
+							<c:pt idx="0">
+								<c:v>Ð ÑÐ´ 2
+								</c:v>
+							</c:pt>
+						</c:strCache>
+					</c:strRef>
+				</c:tx>
+				<c:marker>
+					<c:symbol val="none"/>
+				</c:marker>
+				<c:cat>
+					<c:strRef>
+						<c:f>ÐÐ¸ÑÑ1!$A$2:$A$5
+						</c:f>
+						<c:strCache>
+							<c:ptCount val="4"/><c:pt idx="0">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 1
+				</c:v>
+			</c:pt><c:pt idx="1">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 2
+				</c:v>
+			</c:pt><c:pt idx="2">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 3
+				</c:v>
+			</c:pt><c:pt idx="3">
+				<c:v>ÐÐ°ÑÐµÐ³Ð¾ÑÐ¸Ñ 4
+				</c:v>
+			</c:pt>		</c:strCache>
+				</c:strRef>
+			</c:cat>
+			<c:val>
+				<c:numRef>
+					<c:f>ÐÐ¸ÑÑ1!$B$2:$B$5
+					</c:f>
+					<c:numCache>
+						<c:formatCode>General</c:formatCode>
+						<c:ptCount val="4"/><c:pt idx="0">
+				<c:v>2.5</c:v>
+			</c:pt><c:pt idx="1">
+				<c:v>2</c:v>
+			</c:pt><c:pt idx="2">
+				<c:v>1.5</c:v>
+			</c:pt><c:pt idx="3">
+				<c:v>1</c:v>
+			</c:pt>			</c:numCache>
+					</c:numRef>
+				</c:val>
+			</c:ser>				<c:marker val="1"/>
+							<c:axId val="142309248"/>
+							<c:axId val="142310784"/>
+						</c:lineChart>
+						<c:catAx>
+							<c:axId val="142309248"/>
+							<c:scaling>
+								<c:orientation val="minMax"/>
+							</c:scaling>
+							<c:axPos val="b"/>
+							<c:tickLblPos val="nextTo"/>
+							<c:crossAx val="142310784"/>
+							<c:crosses val="autoZero"/>
+							<c:auto val="1"/>
+							<c:lblAlgn val="ctr"/>
+							<c:lblOffset val="100"/>
+						</c:catAx>
+						<c:valAx>
+							<c:axId val="142310784"/>
+							<c:scaling>
+								<c:orientation val="minMax"/>
+							</c:scaling>
+							<c:axPos val="l"/>
+							<c:majorGridlines/>
+							<c:numFmt formatCode="General" sourceLinked="1"/>
+							<c:tickLblPos val="nextTo"/>
+							<c:crossAx val="142309248"/>
+							<c:crosses val="autoZero"/>
+							<c:crossBetween val="between"/>
+						</c:valAx>
+					</c:plotArea>
+					<c:legend>
+						<c:legendPos val="r"/>
+						<c:layout/>
+					</c:legend>
+					<c:plotVisOnly val="1"/>
+				</c:chart>
+				<c:externalData r:id="rId1"/>
+			</c:chartSpace>
+		""")
+
+
+	fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
 
 	# it 'should work with one image',()->
 	# 	name='imageExample.docx'

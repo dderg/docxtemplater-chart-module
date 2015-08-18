@@ -9,7 +9,7 @@ module.exports = class ChartManager
 	 * @return {ChartManager} for chaining
 	###
 	loadChartRels: () ->
-		console.log('loadChartRels')
+		# console.log('loadChartRels')
 		###*
 		 * load file, save path
 		 * @param  {String} filePath path to current file
@@ -17,7 +17,7 @@ module.exports = class ChartManager
 		###
 		loadFile = (filePath) =>
 			@filePath = filePath
-			console.log('loading file: ' + @filePath)
+			# console.log('loading file: ' + @filePath)
 			return @zip.files[@filePath]
 
 		file = loadFile("word/_rels/#{@endFileName}.xml.rels") || loadFile("word/_rels/document.xml.rels") #duct tape hack, doesn't work otherwise
@@ -34,8 +34,8 @@ module.exports = class ChartManager
 
 
 	addChartRels: (chartName) ->
-		console.log('addChartRels')
-		console.log('name: ' + chartName)
+		# console.log('addChartRels')
+		# console.log('name: ' + chartName)
 		return unless @relsLoaded
 		@maxRid++
 		@_addChartRelationship(@maxRid, chartName);
