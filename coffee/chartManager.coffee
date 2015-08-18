@@ -39,6 +39,7 @@ module.exports = class ChartManager
 		return unless @relsLoaded
 		@maxRid++
 		@_addChartRelationship(@maxRid, chartName);
+		@_addChartContentType(chartName);
 
 		@zip.file(@filePath, DocUtils.encode_utf8(DocUtils.xml2Str(@xmlDoc)), {})
 		return @maxRid
@@ -57,3 +58,20 @@ module.exports = class ChartManager
 		newTag.setAttribute('Target', "charts/#{name}.xml")
 		relationships.appendChild(newTag)
 
+	###*
+	 * add override to [Content_Types].xml
+	 * @param {[type]} name [description]
+	###
+	_addChartContentType: (name) ->
+		path = '[Content_Types].xml'
+		file = @zip.files[path]
+		content = DocUtils.decode_utf8(file.asText())
+		xmlDoc = DocUtils.Str2xml(content)
+		types = xmlDoc.getElementsByTagName("Types")[0]
+		newTag = xmlDoc.createElement('Override')
+		newTag.namespaceURI = 'http://schemas.openxmlformats.org/package/2006/content-types'
+		newTag.setAttribute('ContentType', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml')
+		newTag.setAttribute('PartName', "/word/charts/#{name}.xml")
+		types.appendChild(newTag)
+		console.log types
+		@zip.file(path, DocUtils.encode_utf8(DocUtils.xml2Str(xmlDoc)), {})

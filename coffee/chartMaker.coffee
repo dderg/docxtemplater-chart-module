@@ -11,11 +11,11 @@ module.exports = class ChartMaker
 						<c:lineChart>
 							<c:grouping val="standard"/>
 		"""
-	getLineTemplate: (line) ->
+	getLineTemplate: (line, i) ->
 		result = """
 			<c:ser>
-				<c:idx val="0"/>
-				<c:order val="0"/>
+				<c:idx val="#{i}"/>
+				<c:order val="#{i}"/>
 				<c:tx>
 					<c:strRef>
 						<c:strCache>
@@ -109,8 +109,8 @@ module.exports = class ChartMaker
 
 	makeChartFile: (data) ->
 		result = @getTemplateTop()
-		for line in data.lines
-			result += @getLineTemplate(line)
+		for line, i in data.lines
+			result += @getLineTemplate(line, i)
 		result += @getTemplateBottom()
 		@chartContent = result
 		return @chartContent
