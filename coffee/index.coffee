@@ -22,10 +22,10 @@ class ChartModule
 	handleEvent: (event, eventData) ->
 		console.log('handleEvent event: ' + event);
 		if (event == 'rendering-file')
-			renderingFileName = eventData;
+			@renderingFileName = eventData;
 			# console.log(renderingFileName)
 			gen = @manager.getInstance('gen');
-			@chartManager = new ChartManager(gen.zip, renderingFileName)
+			@chartManager = new ChartManager(gen.zip, @renderingFileName)
 			@chartManager.loadChartRels();
 			
 		else if (event == 'rendered')
@@ -53,7 +53,7 @@ class ChartModule
 		if event == 'error'
 			throw data
 
-	replaceBy: (text,outsideElement) ->
+	replaceBy: (text, outsideElement) ->
 		xmlTemplater = @manager.getInstance('xmlTemplater')
 		templaterState = @manager.getInstance('templaterState')
 		subContent = new SubContent(xmlTemplater.content)
@@ -86,7 +86,8 @@ class ChartModule
 		
 		tagXml = @manager.getInstance('xmlTemplater').tagXml
 
-		@replaceBy(@getChartXml(chartId), tagXml)
+		newText = @getChartXml(chartId)
+		@replaceBy(newText, tagXml)
 
 	getChartXml: (chartID) ->
 		return """

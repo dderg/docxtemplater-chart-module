@@ -18,13 +18,10 @@ module.exports = class ChartMaker
 				<c:order val="0"/>
 				<c:tx>
 					<c:strRef>
-						<c:f>Лист1!$B$1
-						</c:f>
 						<c:strCache>
 							<c:ptCount val="1"/>
 							<c:pt idx="0">
-								<c:v>#{line.name}
-								</c:v>
+								<c:v>#{line.name}</c:v>
 							</c:pt>
 						</c:strCache>
 					</c:strRef>
@@ -34,16 +31,13 @@ module.exports = class ChartMaker
 				</c:marker>
 				<c:cat>
 					<c:strRef>
-						<c:f>Лист1!$A$2:$A$5
-						</c:f>
 						<c:strCache>
 							<c:ptCount val="#{line.data.length}"/>
 		"""
 		for elem, i in line.data
 			result += """
 				<c:pt idx="#{i}">
-					<c:v>#{elem.x}
-					</c:v>
+					<c:v>#{elem.x}</c:v>
 				</c:pt>
 			"""
 		result += """
@@ -52,8 +46,6 @@ module.exports = class ChartMaker
 				</c:cat>
 				<c:val>
 					<c:numRef>
-						<c:f>Лист1!$B$2:$B$5
-						</c:f>
 						<c:numCache>
 							<c:formatCode>General</c:formatCode>
 							<c:ptCount val="#{line.data.length}"/>
@@ -124,5 +116,5 @@ module.exports = class ChartMaker
 		return @chartContent
 
 	writeFile: (path) ->
-		@zip.file("charts/#{path}.xml", DocUtils.encode_utf8(@chartContent), {})
+		@zip.file("word/charts/#{path}.xml", @chartContent, {})
 		return
