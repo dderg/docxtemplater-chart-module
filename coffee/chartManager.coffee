@@ -20,7 +20,7 @@ module.exports = class ChartManager
 			console.log('loading file: ' + @filePath)
 			return @zip.files[@filePath]
 
-		file = loadFile("word/_rels/#{@endFileName}.xml.rels") || loadFile("word/_rels/document.xml.rels")
+		file = loadFile("word/_rels/#{@endFileName}.xml.rels") || loadFile("word/_rels/document.xml.rels") #duct tape hack, doesn't work otherwise
 		return if file == undefined
 		content = DocUtils.decode_utf8(file.asText())
 		@xmlDoc = DocUtils.Str2xml(content)
