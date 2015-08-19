@@ -33,6 +33,10 @@ describe 'adding with {$ chart} syntax', ()->
 		.load(docX[name].loadedContent)
 		.setData({
 			chart: {
+				options: {
+					width: 300,
+					height: 200
+				},
 				lines: [
 					{
 						name: 'Ряд 1',

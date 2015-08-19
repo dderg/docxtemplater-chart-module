@@ -107,9 +107,9 @@ module.exports = class ChartMaker
 	constructor: (@zip) ->
 			
 
-	makeChartFile: (data) ->
+	makeChartFile: (lines) ->
 		result = @getTemplateTop()
-		for line, i in data.lines
+		for line, i in lines
 			result += @getLineTemplate(line, i)
 		result += @getTemplateBottom()
 		@chartContent = result

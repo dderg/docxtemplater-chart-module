@@ -14,8 +14,7 @@ class ChartModule
 	###*
 	 * initialize options with empty object if not recived
 	 * @manager = ModuleManager instance
-	 * @param  {[type]} @options params for the module
-	 * @return {[type]}          [description]
+	 * @param  {Object} @options params for the module
 	###
 	constructor: (@options = {}) ->
 
@@ -59,39 +58,57 @@ class ChartModule
 			.getOuterXml(outsideElement)
 		xmlTemplater.replaceXml(subContent,text)
 
+	convertPixelsToEmus: (pixel) ->
+		Math.round(pixel * 9525)
+
+	extendDefaults: (options) ->
+		defaultOptions = {
+			width: 5486400 / 9525,
+			height: 3200400 / 9525
+		}
+		result = {};
+		for attrname of defaultOptions
+			result[attrname] = defaultOptions[attrname]
+		for attrname of options
+			result[attrname] = options[attrname]
+		return result;
+
 
 	replaceTag: () ->
-		# console.log('replacing tag');
 		scopeManager = @manager.getInstance('scopeManager')
 		templaterState = @manager.getInstance('templaterState')
 		gen = @manager.getInstance('gen');
 
-		tag = templaterState.textInsideTag.substr(1)
-		chartData = scopeManager.getValueFromScope(tag)
-		# console.log('tag: ' + tag)\
+		tag = templaterState.textInsideTag.substr(1) # tag to be replaced
+		chartData = scopeManager.getValueFromScope(tag) # data to build chart from
 		filename = tag
 
 
 		imageRels = @chartManager.loadChartRels()
-		# console.log('imageRels: ' + imageRels)
 
-		return unless imageRels
+		return unless imageRels # break if no Relationships loaded
 		chartId = @chartManager.addChartRels(filename)
 
 		chart = new ChartMaker(gen.zip)
-		chart.makeChartFile(chartData)
+		chart.makeChartFile(chartData.lines)
 		chart.writeFile(filename)
+		
+		options = @extendDefaults(chartData.options)
 		
 		tagXml = @manager.getInstance('xmlTemplater').tagXml
 
-		newText = @getChartXml(chartId)
+		newText = @getChartXml({
+			chartID: chartId,
+			width: @convertPixelsToEmus(options.width),
+			height: @convertPixelsToEmus(options.height)
+		})
 		@replaceBy(newText, tagXml)
 
-	getChartXml: (chartID) ->
+	getChartXml: ({chartID, width, height}) ->
 		return """
 			<w:drawing>
 				<wp:inline distB="0" distL="0" distR="0" distT="0">
-					<wp:extent cx="5486400" cy="3200400"/>
+					<wp:extent cx="#{width}" cy="#{height}"/>
 					<wp:effectExtent b="0" l="19050" r="19050" t="0"/>
 					<wp:docPr id="1" name="Диаграмма 1"/>
 					<wp:cNvGraphicFramePr/>
