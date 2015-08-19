@@ -3,7 +3,8 @@ DocxGen = require('docxtemplater')
 expect = require('chai').expect
 
 fileNames = [
-	'chartExample.docx'
+	'chartExample.docx',
+	'multipleChartsExample.docx'
 ]
 
 ChartModule=require('../js/index.js')
@@ -124,6 +125,199 @@ describe 'adding with {$ chart} syntax', ()->
 
 
 	fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
+
+describe 'multiple charts adding', () ->
+	name = 'multipleChartsExample.docx'
+	chartModule = new ChartModule()
+	docX[name].attachModule(chartModule)
+	out = docX[name]
+		.load(docX[name].loadedContent)
+		.setData({
+			chart: {
+				lines: [
+					{
+						name: 'line 1',
+						data: [
+							{
+								x: 'day 1',
+								y: '4.3'
+							},
+							{
+								x: 'day 2',
+								y: '2.5'
+							},
+							{
+								x: 'day 3',
+								y: '3.5'
+							},
+							{
+								x: 'day 4',
+								y: '4.5'
+							}
+						]
+					},
+					{
+						name: 'line 2',
+						data: [
+							{
+								x: 'day 1',
+								y: '2.4'
+							},
+							{
+								x: 'day 2',
+								y: '4'
+							},
+							{
+								x: 'day 3',
+								y: '1.8'
+							},
+							{
+								x: 'day 4',
+								y: '2.8'
+							}
+						]
+					},
+					{
+						name: 'line 3',
+						data: [
+							{
+								x: 'day 1',
+								y: '2'
+							},
+							{
+								x: 'day 2',
+								y: '2'
+							},
+							{
+								x: 'day 3',
+								y: '3'
+							},
+							{
+								x: 'day 4',
+								y: '5'
+							}
+						]
+					}
+				]
+			},
+			chart2: {
+				lines: [
+					{
+						name: 'line 1',
+						data: [
+							{
+								x: 'day 1',
+								y: '1'
+							},
+							{
+								x: 'day 2',
+								y: '100'
+							},
+							{
+								x: 'day 3',
+								y: '3'
+							},
+							{
+								x: 'day 4',
+								y: '4.5'
+							},
+							{
+								x: 'day 5',
+								y: '100'
+							},
+							{
+								x: 'day 6',
+								y: '3'
+							},
+							{
+								x: 'day 7',
+								y: '100'
+							},
+							{
+								x: 'day 8',
+								y: '3'
+							},
+							{
+								x: 'day 9',
+								y: '100'
+							},
+							{
+								x: 'day 10',
+								y: '3'
+							},
+							{
+								x: 'day 11',
+								y: '100'
+							},
+							{
+								x: 'day 12',
+								y: '3'
+							},
+							{
+								x: 'day 13',
+								y: '100'
+							},
+							{
+								x: 'day 14',
+								y: '3'
+							},
+							{
+								x: 'day 15',
+								y: '100'
+							},
+							{
+								x: 'day 16',
+								y: '3'
+							},
+							{
+								x: 'day 17',
+								y: '100'
+							},
+							{
+								x: 'day 18',
+								y: '3'
+							},
+							{
+								x: 'day 19',
+								y: '100'
+							},
+							{
+								x: 'day 20',
+								y: '3'
+							},
+							{
+								x: 'day 21',
+								y: '100'
+							},
+							{
+								x: 'day 22',
+								y: '3'
+							},
+							{
+								x: 'day 23',
+								y: '100'
+							},
+							{
+								x: 'day 24',
+								y: '3'
+							},
+							{
+								x: 'day 25',
+								y: '100'
+							},
+							{
+								x: 'day 26',
+								y: '3'
+							}
+						]
+					}
+				]
+			}
+		})
+		.render()
+	zip = out.getZip()
+
+	fs.writeFile('multipleTest.docx', zip.generate({type: "nodebuffer"}));
 
 	# it 'should work with one image',()->
 	# 	name='imageExample.docx'

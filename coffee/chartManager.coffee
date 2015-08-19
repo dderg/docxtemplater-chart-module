@@ -60,7 +60,7 @@ module.exports = class ChartManager
 
 	###*
 	 * add override to [Content_Types].xml
-	 * @param {[type]} name [description]
+	 * @param {String} name filename
 	###
 	_addChartContentType: (name) ->
 		path = '[Content_Types].xml'
@@ -73,5 +73,4 @@ module.exports = class ChartManager
 		newTag.setAttribute('ContentType', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml')
 		newTag.setAttribute('PartName', "/word/charts/#{name}.xml")
 		types.appendChild(newTag)
-		console.log types
 		@zip.file(path, DocUtils.encode_utf8(DocUtils.xml2Str(xmlDoc)), {})

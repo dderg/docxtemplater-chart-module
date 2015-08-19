@@ -1,11 +1,19 @@
 {
   "name": "docxtemplater-chart-module",
-  "version": "0.3.4",
+  "version": "0.0.1",
   "description": "Chart Module for docxtemplater v1.0",
   "main": "js/index.js",
   "scripts": {
     "test": "mocha"
   },
+  "keywords": [
+    "docx",
+    "docxtemplater",
+    "generation",
+    "microsoft word",
+    "charts",
+    "chart"
+  ],
   "devDependencies": {
     "chai": "^1.10.0",
     "gulp": "~3.8.0",
@@ -15,9 +23,9 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/prog666/docxtemplater-chart-module.git"
   },
-  "author": "Danila Dergachev",
+  "author": "Danila Dergachev  <gnomdan@yandex.ru>",
   "license": "MIT",
   "dependencies": {
     "docxtemplater": "^1.0.5",
