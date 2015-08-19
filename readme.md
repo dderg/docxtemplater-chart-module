@@ -130,6 +130,9 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 0.0.8
+- grid option
+
 ### 0.0.7
 - lines on axis are still stacking, sadly
 
