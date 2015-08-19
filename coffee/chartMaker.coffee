@@ -82,7 +82,7 @@ module.exports = class ChartMaker
 						</c:lineChart>
 						<c:catAx>
 							<c:axId val="#{@id1}"/>
-							#{@getScaling(@options.axis.y)}
+							#{@getScaling(@options.axis.x)}
 							<c:axPos val="b"/>
 							<c:tickLblPos val="nextTo"/>
 							<c:crossAx val="#{@id2}"/>
@@ -93,7 +93,7 @@ module.exports = class ChartMaker
 						</c:catAx>
 						<c:valAx>
 							<c:axId val="#{@id2}"/>
-							#{@getScaling(@options.axis.x)}
+							#{@getScaling(@options.axis.y)}
 							<c:axPos val="l"/>
 							<c:majorGridlines/>
 							<c:numFmt formatCode="General" sourceLinked="1"/>

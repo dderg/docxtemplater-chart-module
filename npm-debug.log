@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'publish' ]
+2 info using npm@2.13.5
+3 info using node@v0.12.7
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/prog/projects/docxtemplater-chart-module',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/prog/.npm/docxtemplater-chart-module/0.0.5/package.tgz not in flight; packing
+9 verbose tar pack [ '/home/prog/.npm/docxtemplater-chart-module/0.0.5/package.tgz',
+9 verbose tar pack   '/home/prog/projects/docxtemplater-chart-module' ]
+10 verbose tarball /home/prog/.npm/docxtemplater-chart-module/0.0.5/package.tgz
+11 verbose folder /home/prog/projects/docxtemplater-chart-module
+12 info prepublish docxtemplater-chart-module@0.0.5
+13 verbose addLocalTarball adding from inside cache /home/prog/.npm/docxtemplater-chart-module/0.0.5/package.tgz
+14 silly cache afterAdd docxtemplater-chart-module@0.0.5
+15 verbose afterAdd /home/prog/.npm/docxtemplater-chart-module/0.0.5/package/package.json not in flight; writing
+16 verbose afterAdd /home/prog/.npm/docxtemplater-chart-module/0.0.5/package/package.json written
+17 silly publish { name: 'docxtemplater-chart-module',
+17 silly publish   version: '0.0.5',
+17 silly publish   description: 'Chart Module for docxtemplater v1.0',
+17 silly publish   main: 'js/index.js',
+17 silly publish   scripts: { test: 'mocha' },
+17 silly publish   keywords:
+17 silly publish    [ 'docx',
+17 silly publish      'docxtemplater',
+17 silly publish      'generation',
+17 silly publish      'microsoft word',
+17 silly publish      'charts',
+17 silly publish      'chart' ],
+17 silly publish   devDependencies:
+17 silly publish    { chai: '^1.10.0',
+17 silly publish      gulp: '~3.8.0',
+17 silly publish      'gulp-coffee': '~2.0.1',
+17 silly publish      'gulp-uglify': '~0.3.0',
+17 silly publish      'gulp-watch': '~0.6.5' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/prog666/docxtemplater-chart-module.git' },
+17 silly publish   author: { name: 'Danila Dergachev', email: 'gnomdan@yandex.ru' },
+17 silly publish   license: 'MIT',
+17 silly publish   dependencies:
+17 silly publish    { docxtemplater: '^1.0.5',
+17 silly publish      'gulp-browserify': '^0.5.0',
+17 silly publish      jszip: '^2.4.0',
+17 silly publish      xmldom: '^0.1.19' },
+17 silly publish   bugs: { url: 'https://github.com/prog666/docxtemplater-chart-module/issues' },
+17 silly publish   homepage: 'https://github.com/prog666/docxtemplater-chart-module#readme',
+17 silly publish   directories: { example: 'examples', test: 'test' },
+17 silly publish   readme: 'Chart module for docxtemplater.\n\nthis module has only simple usage yet, contact me on gnomdan@yandex.ru or @prog666 in telegram if you want to help me with this\n\n[![Join the chat at https://gitter.im/prog666/docxtemplater-chart-module](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/prog666/docxtemplater-chart-module?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n\n[![Build Status](https://travis-ci.org/prog666/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/prog666/docxtemplater-chart-module)\n\n# Installation:\n\nYou will need docxtemplater v1: `npm install docxtemplater`\n\ninstall this modile: `npm install docxtemplater-chart-module`\n\n# Usage\n\nYour docx should contain the text: `{$chart}`\n\n    ChartModule = require(‘docxtemplater-chart-module’)\n\n    chartModule = new ChartModule()\n\n    docx = new DocxGen()\n        .attachModule(chartModule)\n        .load(content)\n        .setData({\n          chart: {\n            options: { # theese are defaults, no need to write them\n              width: 5486400 / 9525,\n              height: 3200400 / 9525,\n              legend: {\n                position: \'r\', # \'l\', \'r\', \'b\', \'t\'\n              },\n              axis: {\n                x: {\n                  orientation: \'minMax\', # \'maxMin\'\n                  min: undefined, # number\n                  max: undefined\n                },\n                y: {\n                  orientation: \'minMax\',\n                  mix: undefined,\n                  max: undefined\n                }\n              }\n            }\n            lines: [\n              {\n                name: \'line 1\',\n                data: [\n                  {\n                    x: \'day 1\',\n                    y: \'4.3\'\n                  },\n                  {\n                    x: \'day 2\',\n                    y: \'2.5\'\n                  },\n                  {\n                    x: \'day 3\',\n                    y: \'3.5\'\n                  },\n                  {\n                    x: \'day 4\',\n                    y: \'4.5\'\n                  }\n                ]\n              },\n              {\n                name: \'line 2\',\n                data: [\n                  {\n                    x: \'day 1\',\n                    y: \'2.4\'\n                  },\n                  {\n                    x: \'day 2\',\n                    y: \'4.4000000000000004\'\n                  },\n                  {\n                    x: \'day 3\',\n                    y: \'1.8\'\n                  },\n                  {\n                    x: \'day 4\',\n                    y: \'2.8\'\n                  }\n                ]\n              },\n              {\n                name: \'line 3\',\n                data: [\n                  {\n                    x: \'day 1\',\n                    y: \'2\'\n                  },\n                  {\n                    x: \'day 2\',\n                    y: \'2\'\n                  },\n                  {\n                    x: \'day 3\',\n                    y: \'3\'\n                  },\n                  {\n                    x: \'day 4\',\n                    y: \'5\'\n                  }\n                ]\n              }\n            ]\n          }\n        })\n        .render()\n\n    buffer= docx\n            .getZip()\n            .generate({type:"nodebuffer"})\n\n    fs.writeFile("test.docx",buffer);\n\n\n# Building\n\n You can build the coffee into js by running `gulp` (this will watch the directory for changes)\n\n# Testing\n\nYou can test that everything works fine using the command `mocha`. This will also create 3 docx files under the root directory that you can open to check if the docx are correct\n\n# Changelog\n\n### 0.0.5\n- min and max axis values options added\n- options are nested now for easier readability',
+17 silly publish   readmeFilename: 'readme.md',
+17 silly publish   gitHead: '62d0f39f1bc90541fc1dde0d3c489d39ef66cfb0',
+17 silly publish   _id: 'docxtemplater-chart-module@0.0.5',
+17 silly publish   _shasum: '35c80ddd717f1375be136be62f68e94666777bf5',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name docxtemplater-chart-module
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/docxtemplater-chart-module
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /home/prog/.npm/docxtemplater-chart-module/0.0.5/package.tgz
+25 verbose request uri https://registry.npmjs.org/docxtemplater-chart-module
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 17:41:54
+28 verbose request using bearer token for auth
+29 verbose request id 931af7c9ac2bf5e5
+30 http request PUT https://registry.npmjs.org/docxtemplater-chart-module
+31 http 403 https://registry.npmjs.org/docxtemplater-chart-module
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Wed, 19 Aug 2015 14:42:00 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-ams4131-AMS',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1439995320.020189,VS0,VE952' }
+33 verbose request invalidating /home/prog/.npm/registry.npmjs.org/docxtemplater-chart-module on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 0.0.5." : docxtemplater-chart-module
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:247:14)
+35 verbose stack     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+35 verbose stack     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at Request.emit (events.js:110:17)
+35 verbose stack     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1057:14)
+35 verbose stack     at Request.emit (events.js:129:20)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1003:12)
+35 verbose stack     at IncomingMessage.emit (events.js:129:20)
+35 verbose stack     at _stream_readable.js:908:16
+35 verbose stack     at process._tickCallback (node.js:355:11)
+36 verbose statusCode 403
+37 verbose pkgid docxtemplater-chart-module
+38 verbose cwd /home/prog/projects/docxtemplater-chart-module
+39 error Linux 4.1.5-1-ARCH
+40 error argv "node" "/usr/bin/npm" "publish"
+41 error node v0.12.7
+42 error npm  v2.13.5
+43 error code E403
+44 error "You cannot publish over the previously published version 0.0.5." : docxtemplater-chart-module
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]

@@ -130,6 +130,9 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 0.0.6
+- x and y axises flipped in options, now correct
+
 ### 0.0.5
 - min and max axis values options added
 - options are nested now for easier readability

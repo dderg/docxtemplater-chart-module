@@ -217,8 +217,7 @@ describe 'multiple charts adding', () ->
 			chart2: {
 				options: {
 					axis: {
-						x: {
-							orientation: 'minMax',
+						y: {
 							min: 1000000000,
 							max: 50000000000
 						}
