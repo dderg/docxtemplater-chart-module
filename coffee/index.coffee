@@ -60,7 +60,7 @@ class ChartModule
 
 	convertPixelsToEmus: (pixel) ->
 		Math.round(pixel * 9525)
-		
+
 	extendDefaults: (options) ->
 		deepMerge = (target, source) ->
 			for key of source
@@ -74,6 +74,7 @@ class ChartModule
 		defaultOptions = {
 			width: 5486400 / 9525,
 			height: 3200400 / 9525,
+			grid: true,
 			legend: {
 				position: 'r', # 'l', 'r', 'b', 't'
 			},

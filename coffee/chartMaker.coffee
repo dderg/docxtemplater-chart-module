@@ -95,7 +95,7 @@ module.exports = class ChartMaker
 							<c:axId val="#{@id2}"/>
 							#{@getScaling(@options.axis.y)}
 							<c:axPos val="l"/>
-							<c:majorGridlines/>
+							#{if @options.grid then "<c:majorGridlines/>" else ""}
 							<c:numFmt formatCode="General" sourceLinked="1"/>
 							<c:tickLblPos val="nextTo"/>
 							<c:crossAx val="#{@id1}"/>
@@ -107,7 +107,6 @@ module.exports = class ChartMaker
 						<c:legendPos val="#{@options.legend.position}"/>
 						<c:layout/>
 					</c:legend>
-					<c:dispBlanksAs val="gap"/>
 					<c:plotVisOnly val="1"/>
 				</c:chart>
 			</c:chartSpace>
