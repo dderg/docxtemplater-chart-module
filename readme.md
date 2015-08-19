@@ -130,6 +130,9 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 0.0.7
+- lines on axis not stacking
+
 ### 0.0.6
 - x and y axises flipped in options, now correct
 

@@ -107,6 +107,7 @@ module.exports = class ChartMaker
 						<c:legendPos val="#{@options.legend.position}"/>
 						<c:layout/>
 					</c:legend>
+					<c:dispBlanksAs val="gap"/>
 					<c:plotVisOnly val="1"/>
 				</c:chart>
 			</c:chartSpace>
