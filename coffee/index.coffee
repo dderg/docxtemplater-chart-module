@@ -20,7 +20,6 @@ class ChartModule
 	constructor: (@options = {}) ->
 
 	handleEvent: (event, eventData) ->
-		console.log('handleEvent event: ' + event);
 		if (event == 'rendering-file')
 			@renderingFileName = eventData;
 			# console.log(renderingFileName)
@@ -47,7 +46,6 @@ class ChartModule
 		return null
 	
 	finished: () ->
-		console.log('finished')
 
 	on: (event, data) ->
 		if event == 'error'

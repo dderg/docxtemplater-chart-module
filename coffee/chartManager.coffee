@@ -26,7 +26,6 @@ module.exports = class ChartManager
 		@xmlDoc = DocUtils.Str2xml(content)
 		RidArray = ((parseInt tag.getAttribute("Id").substr(3)) for tag in @xmlDoc.getElementsByTagName('Relationship')) #Get all Rids
 		@maxRid = DocUtils.maxArray(RidArray)
-		console.log @maxRid
 		# console.log @xmlDoc
 		@chartRels = []
 		@relsLoaded = true
