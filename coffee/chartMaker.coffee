@@ -88,6 +88,16 @@ module.exports = class ChartMaker
 							<c:crossAx val="#{@id2}"/>
 							<c:crosses val="autoZero"/>
 							<c:auto val="1"/>
+							<c:txPr>
+								<a:bodyPr/>
+								<a:lstStyle/>
+								<a:p>
+									<a:pPr>
+										<a:defRPr sz="500"/>
+									</a:pPr>
+									<a:endParaRPr lang="ru-RU"/>
+								</a:p>
+							</c:txPr>
 							<c:lblAlgn val="ctr"/>
 							<c:lblOffset val="100"/>
 						</c:catAx>
@@ -98,6 +108,16 @@ module.exports = class ChartMaker
 							#{if @options.grid then "<c:majorGridlines/>" else ""}
 							<c:numFmt formatCode="General" sourceLinked="1"/>
 							<c:tickLblPos val="nextTo"/>
+							<c:txPr>
+								<a:bodyPr/>
+								<a:lstStyle/>
+								<a:p>
+									<a:pPr>
+										<a:defRPr sz="600"/>
+									</a:pPr>
+									<a:endParaRPr lang="ru-RU"/>
+								</a:p>
+							</c:txPr>
 							<c:crossAx val="#{@id1}"/>
 							<c:crosses val="autoZero"/>
 							<c:crossBetween val="between"/>
