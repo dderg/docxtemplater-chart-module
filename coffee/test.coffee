@@ -7,14 +7,14 @@ fileNames = [
 	'multipleChartsExample.docx'
 ]
 
-ChartModule=require('../js/index.js')
+ChartModule = require('../js/index.js')
 
-docX={}
+docX = {}
 
-loadFile=(name)->
-	if fs.readFileSync? then return fs.readFileSync(__dirname+"/../examples/"+name,"binary")
-	xhrDoc= new XMLHttpRequest()
-	xhrDoc.open('GET',"../examples/"+name,false)
+loadFile = (name) ->
+	if fs.readFileSync? then return fs.readFileSync(__dirname + "/../examples/" + name, "binary")
+	xhrDoc = new XMLHttpRequest()
+	xhrDoc.open('GET', "../examples/" + name, false)
 	if (xhrDoc.overrideMimeType)
 		xhrDoc.overrideMimeType('text/plain; charset=x-user-defined')
 	xhrDoc.send()
@@ -35,7 +35,8 @@ describe 'adding with {$ chart} syntax', ()->
 			chart: {
 				options: {
 					width: 300,
-					height: 200
+					height: 200,
+					legendPosition: 'l' # can be 'r'
 				},
 				lines: [
 					{

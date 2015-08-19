@@ -97,14 +97,14 @@ module.exports = class ChartMaker
 						</c:valAx>
 					</c:plotArea>
 					<c:legend>
-						<c:legendPos val="r"/>
+						<c:legendPos val="#{@options.legendPosition}"/>
 						<c:layout/>
 					</c:legend>
 					<c:plotVisOnly val="1"/>
 				</c:chart>
 			</c:chartSpace>
 		"""
-	constructor: (@zip) ->
+	constructor: (@zip, @options) ->
 			
 
 	makeChartFile: (lines) ->

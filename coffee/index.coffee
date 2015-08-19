@@ -64,7 +64,8 @@ class ChartModule
 	extendDefaults: (options) ->
 		defaultOptions = {
 			width: 5486400 / 9525,
-			height: 3200400 / 9525
+			height: 3200400 / 9525,
+			legendPosition: 'r'
 		}
 		result = {};
 		for attrname of defaultOptions
@@ -89,11 +90,11 @@ class ChartModule
 		return unless imageRels # break if no Relationships loaded
 		chartId = @chartManager.addChartRels(filename)
 
-		chart = new ChartMaker(gen.zip)
+		options = @extendDefaults(chartData.options)
+		chart = new ChartMaker(gen.zip, options)
 		chart.makeChartFile(chartData.lines)
 		chart.writeFile(filename)
 		
-		options = @extendDefaults(chartData.options)
 		
 		tagXml = @manager.getInstance('xmlTemplater').tagXml
 
