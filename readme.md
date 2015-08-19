@@ -12,75 +12,75 @@ install this modile: `npm install docxtemplater-chart-module`
 
 Your docx should contain the text: `{$chart}`
 
-    ChartModule=require(‘docxtemplater-chart-module’)
+    ChartModule = require(‘docxtemplater-chart-module’)
 
-    chartModule=new ChartModule({centered:false})
+    chartModule = new ChartModule()
 
-    docx=new DocxGen()
+    docx = new DocxGen()
         .attachModule(chartModule)
         .load(content)
         .setData({
           chart: {
             lines: [
               {
-                name: 'Ряд 1',
+                name: 'line 1',
                 data: [
                   {
-                    x: 'Категория 1',
+                    x: 'day 1',
                     y: '4.3'
                   },
                   {
-                    x: 'Категория 2',
+                    x: 'day 2',
                     y: '2.5'
                   },
                   {
-                    x: 'Категория 3',
+                    x: 'day 3',
                     y: '3.5'
                   },
                   {
-                    x: 'Категория 4',
+                    x: 'day 4',
                     y: '4.5'
                   }
                 ]
               },
               {
-                name: 'Ряд 2',
+                name: 'line 2',
                 data: [
                   {
-                    x: 'Категория 1',
+                    x: 'day 1',
                     y: '2.4'
                   },
                   {
-                    x: 'Категория 2',
+                    x: 'day 2',
                     y: '4.4000000000000004'
                   },
                   {
-                    x: 'Категория 3',
+                    x: 'day 3',
                     y: '1.8'
                   },
                   {
-                    x: 'Категория 4',
+                    x: 'day 4',
                     y: '2.8'
                   }
                 ]
               },
               {
-                name: 'Ряд 3',
+                name: 'line 3',
                 data: [
                   {
-                    x: 'Категория 1',
+                    x: 'day 1',
                     y: '2'
                   },
                   {
-                    x: 'Категория 2',
+                    x: 'day 2',
                     y: '2'
                   },
                   {
-                    x: 'Категория 3',
+                    x: 'day 3',
                     y: '3'
                   },
                   {
-                    x: 'Категория 4',
+                    x: 'day 4',
                     y: '5'
                   }
                 ]
