@@ -60,20 +60,38 @@ class ChartModule
 
 	convertPixelsToEmus: (pixel) ->
 		Math.round(pixel * 9525)
-
+		
 	extendDefaults: (options) ->
+		deepMerge = (target, source) ->
+			for key of source
+				original = target[key]
+				next = source[key]
+				if original and next and typeof next == 'object'
+					deepMerge original, next
+				else
+					target[key] = next
+			return target
 		defaultOptions = {
 			width: 5486400 / 9525,
 			height: 3200400 / 9525,
-			legendPosition: 'r', # 'l'
-			orientationX: 'minMax', # 'maxMin'
-			orientationY: 'minMax'
+			legend: {
+				position: 'r', # 'l', 'r', 'b', 't'
+			},
+			axis: {
+				x: {
+					orientation: 'minMax', # 'maxMin'
+					min: undefined, # number
+					max: undefined
+				},
+				y: {
+					orientation: 'minMax',
+					mix: undefined,
+					max: undefined
+				}
+			}
 		}
-		result = {};
-		for attrname of defaultOptions
-			result[attrname] = defaultOptions[attrname]
-		for attrname of options
-			result[attrname] = options[attrname]
+		result = deepMerge({}, defaultOptions);
+		result = deepMerge(result, options);
 		return result;
 
 

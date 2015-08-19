@@ -36,7 +36,9 @@ describe 'adding with {$ chart} syntax', ()->
 				options: {
 					width: 300,
 					height: 200,
-					legendPosition: 'l' # can be 'r'
+					legend: {
+						position: 'l' # can be 'r'
+					}
 				},
 				lines: [
 					{
@@ -116,9 +118,13 @@ describe 'adding with {$ chart} syntax', ()->
 			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings" Target="webSettings.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart.xml"/></Relationships>
 		""")
 
-	it 'should create chart file', () ->
+	it 'should create chart file without min and max in scaling', () ->
 		chartFile = zip.files['word/charts/chart.xml']
 		expect(chartFile?).to.equal(true)
+		chartFileContent = chartFile.asText()
+		expect(chartFileContent).to.contain("c:orientation")
+		expect(chartFileContent).to.not.contain("c:max")
+
 
 	it 'should add content type', () ->
 		typeFile = zip.files['[Content_Types].xml']
@@ -127,6 +133,9 @@ describe 'adding with {$ chart} syntax', ()->
 		expect(typeFileContent).to.equal("""
 			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="wmf" ContentType="image/x-wmf"/><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/><Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/><Override PartName="/word/webSettings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml" PartName="/word/charts/chart.xml"/></Types>
 		""")
+		
+	
+
 
 
 	fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
@@ -206,6 +215,15 @@ describe 'multiple charts adding', () ->
 				]
 			},
 			chart2: {
+				options: {
+					axis: {
+						x: {
+							orientation: 'minMax',
+							min: 1000000000,
+							max: 50000000000
+						}
+					}
+				}
 				lines: [
 					{
 						name: 'line 1',

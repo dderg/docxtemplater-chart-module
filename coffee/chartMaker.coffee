@@ -63,41 +63,48 @@ module.exports = class ChartMaker
 			</c:ser>
 		"""
 		return result
+	id1: 142309248,
+	id2: 142310784
+	getScaling: (opts) ->
+		"""
+		<c:scaling>
+			<c:orientation val="#{opts.orientation}"/>
+			#{if opts.max != undefined then "<c:max val=\"#{opts.max}\"/>" else ""}
+			#{if opts.min != undefined then "<c:min val=\"#{opts.min}\"/>" else ""}
+		</c:scaling>
+		"""
+
 	getTemplateBottom: () ->
 		return """
 							<c:marker val="1"/>
-							<c:axId val="142309248"/>
-							<c:axId val="142310784"/>
+							<c:axId val="#{@id1}"/>
+							<c:axId val="#{@id2}"/>
 						</c:lineChart>
 						<c:catAx>
-							<c:axId val="142309248"/>
-							<c:scaling>
-								<c:orientation val="#{@options.orientationY}"/>
-							</c:scaling>
+							<c:axId val="#{@id1}"/>
+							#{@getScaling(@options.axis.y)}
 							<c:axPos val="b"/>
 							<c:tickLblPos val="nextTo"/>
-							<c:crossAx val="142310784"/>
+							<c:crossAx val="#{@id2}"/>
 							<c:crosses val="autoZero"/>
 							<c:auto val="1"/>
 							<c:lblAlgn val="ctr"/>
 							<c:lblOffset val="100"/>
 						</c:catAx>
 						<c:valAx>
-							<c:axId val="142310784"/>
-							<c:scaling>
-								<c:orientation val="#{@options.orientationX}"/>
-							</c:scaling>
+							<c:axId val="#{@id2}"/>
+							#{@getScaling(@options.axis.x)}
 							<c:axPos val="l"/>
 							<c:majorGridlines/>
 							<c:numFmt formatCode="General" sourceLinked="1"/>
 							<c:tickLblPos val="nextTo"/>
-							<c:crossAx val="142309248"/>
+							<c:crossAx val="#{@id1}"/>
 							<c:crosses val="autoZero"/>
 							<c:crossBetween val="between"/>
 						</c:valAx>
 					</c:plotArea>
 					<c:legend>
-						<c:legendPos val="#{@options.legendPosition}"/>
+						<c:legendPos val="#{@options.legend.position}"/>
 						<c:layout/>
 					</c:legend>
 					<c:plotVisOnly val="1"/>

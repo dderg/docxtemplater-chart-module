@@ -25,6 +25,25 @@ Your docx should contain the text: `{$chart}`
         .load(content)
         .setData({
           chart: {
+            options: { # theese are defaults, no need to write them
+              width: 5486400 / 9525,
+              height: 3200400 / 9525,
+              legend: {
+                position: 'r', # 'l', 'r', 'b', 't'
+              },
+              axis: {
+                x: {
+                  orientation: 'minMax', # 'maxMin'
+                  min: undefined, # number
+                  max: undefined
+                },
+                y: {
+                  orientation: 'minMax',
+                  mix: undefined,
+                  max: undefined
+                }
+              }
+            }
             lines: [
               {
                 name: 'line 1',
@@ -108,3 +127,9 @@ Your docx should contain the text: `{$chart}`
 # Testing
 
 You can test that everything works fine using the command `mocha`. This will also create 3 docx files under the root directory that you can open to check if the docx are correct
+
+# Changelog
+
+### 0.0.5
+- min and max axis values options added
+- options are nested now for easier readability
