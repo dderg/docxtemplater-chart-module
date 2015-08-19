@@ -4,6 +4,8 @@ this module has only simple usage yet, contact me on gnomdan@yandex.ru or @prog6
 
 [![Join the chat at https://gitter.im/prog666/docxtemplater-chart-module](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/prog666/docxtemplater-chart-module?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Build Status](https://travis-ci.org/prog666/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/prog666/docxtemplater-chart-module)
+
 # Installation:
 
 You will need docxtemplater v1: `npm install docxtemplater`
