@@ -65,7 +65,9 @@ class ChartModule
 		defaultOptions = {
 			width: 5486400 / 9525,
 			height: 3200400 / 9525,
-			legendPosition: 'r'
+			legendPosition: 'r', # 'l'
+			orientationX: 'minMax', # 'maxMin'
+			orientationY: 'minMax'
 		}
 		result = {};
 		for attrname of defaultOptions

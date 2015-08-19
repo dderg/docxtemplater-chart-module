@@ -72,7 +72,7 @@ module.exports = class ChartMaker
 						<c:catAx>
 							<c:axId val="142309248"/>
 							<c:scaling>
-								<c:orientation val="minMax"/>
+								<c:orientation val="#{@options.orientationY}"/>
 							</c:scaling>
 							<c:axPos val="b"/>
 							<c:tickLblPos val="nextTo"/>
@@ -85,7 +85,7 @@ module.exports = class ChartMaker
 						<c:valAx>
 							<c:axId val="142310784"/>
 							<c:scaling>
-								<c:orientation val="minMax"/>
+								<c:orientation val="#{@options.orientationX}"/>
 							</c:scaling>
 							<c:axPos val="l"/>
 							<c:majorGridlines/>
