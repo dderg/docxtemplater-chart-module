@@ -4,6 +4,7 @@ expect = require('chai').expect
 
 fileNames = [
 	'chartExample.docx',
+	'dateExample.docx',
 	'multipleChartsExample.docx'
 ]
 
@@ -42,64 +43,64 @@ describe 'adding with {$ chart} syntax', ()->
 				},
 				lines: [
 					{
-						name: 'Ряд 1',
+						name: 'line 1',
 						data: [
 							{
-								x: 'Категория 1',
+								x: 'day 1',
 								y: '4.3'
 							},
 							{
-								x: 'Категория 2',
+								x: 'day 2',
 								y: '2.5'
 							},
 							{
-								x: 'Категория 3',
+								x: 'day 3',
 								y: '3.5'
 							},
 							{
-								x: 'Категория 4',
+								x: 'day 4',
 								y: '4.5'
 							}
 						]
 					},
 					{
-						name: 'Ряд 2',
+						name: 'line 2',
 						data: [
 							{
-								x: 'Категория 1',
+								x: 'day 1',
 								y: '2.4'
 							},
 							{
-								x: 'Категория 2',
+								x: 'day 2',
 								y: '4.4000000000000004'
 							},
 							{
-								x: 'Категория 3',
+								x: 'day 3',
 								y: '1.8'
 							},
 							{
-								x: 'Категория 4',
+								x: 'day 4',
 								y: '2.8'
 							}
 						]
 					},
 					{
-						name: 'Ряд 3',
+						name: 'line 3',
 						data: [
 							{
-								x: 'Категория 1',
+								x: 'day 1',
 								y: '2'
 							},
 							{
-								x: 'Категория 2',
+								x: 'day 2',
 								y: '2'
 							},
 							{
-								x: 'Категория 3',
+								x: 'day 3',
 								y: '3'
 							},
 							{
-								x: 'Категория 4',
+								x: 'day 4',
 								y: '5'
 							}
 						]
@@ -783,6 +784,47 @@ describe 'multiple charts adding', () ->
 	zip = out.getZip()
 
 	fs.writeFile('multipleTest.docx', zip.generate({type: "nodebuffer"}));
+
+describe 'date type with unix timestapm', () ->
+	name = 'dateExample.docx'
+	chartModule = new ChartModule()
+	docX[name].attachModule(chartModule)
+	out = docX[name]
+		.load(docX[name].loadedContent)
+		.setData({
+			chart: {
+				options: {
+					xValuesType: 'date', # can be 'date', 'normal'
+					dateFormat: 'unix'
+				},
+				lines: [
+					{
+						name: 'line 1',
+						data: [
+							{
+								x: '1382400000',
+								y: 2
+							},
+							{
+								x: '1382486400',
+								y: 4
+							},
+							{
+								x: '1382572800',
+								y: 3
+							},
+							{
+								x: '1382659200',
+								y: 5
+							}
+						]
+					}
+				]
+			}
+		})
+		.render()
+	zip = out.getZip()
+	fs.writeFile('date.docx', zip.generate({type:"nodebuffer"}));
 
 	# it 'should work with one image',()->
 	# 	name='imageExample.docx'

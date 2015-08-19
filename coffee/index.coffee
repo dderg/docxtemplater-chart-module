@@ -90,11 +90,19 @@ class ChartModule
 					max: undefined
 				}
 			}
+			xValuesType: 'normal', # 'normal', 'date'
+			dateFormat: 'unix' # 'unix', '1900'
+			dateFormatCode: 'm/d/yyyy' 
 		}
 		result = deepMerge({}, defaultOptions);
 		result = deepMerge(result, options);
 		return result;
 
+	convertUnixTo1900: (chartData) ->
+		for line in chartData.lines
+			for data in line.data
+				data.x = data.x / 86400 + 25569
+		return chartData
 
 	replaceTag: () ->
 		scopeManager = @manager.getInstance('scopeManager')
@@ -112,6 +120,10 @@ class ChartModule
 		chartId = @chartManager.addChartRels(filename)
 
 		options = @extendDefaults(chartData.options)
+
+		if options.xValuesType == 'date' and options.dateFormat == 'unix'
+			chartData = @convertUnixTo1900(chartData)
+
 		chart = new ChartMaker(gen.zip, options)
 		chart.makeChartFile(chartData.lines)
 		chart.writeFile(filename)
