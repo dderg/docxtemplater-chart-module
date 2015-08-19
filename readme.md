@@ -4,6 +4,8 @@ this module is not ready yet, contact me on gnomdan@yandex.ru or @prog666 in tel
 
 # Installation:
 
+[![Join the chat at https://gitter.im/prog666/docxtemplater-chart-module](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/prog666/docxtemplater-chart-module?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 You will need docxtemplater v1: `npm install docxtemplater`
 
 install this modile: `npm install docxtemplater-chart-module`
