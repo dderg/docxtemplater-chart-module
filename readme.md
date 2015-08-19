@@ -6,7 +6,7 @@ this module is not ready yet, contact me on gnomdan@yandex.ru or @prog666 in tel
 
 You will need docxtemplater v1: `npm install docxtemplater`
 
-<!-- install this module: `npm install docxtemplater-image-module` -->
+install this modile: `npm install docxtemplater-chart-module`
 
 # Usage
 
