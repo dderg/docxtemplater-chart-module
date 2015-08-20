@@ -75,6 +75,7 @@ class ChartModule
 			width: 5486400 / 9525,
 			height: 3200400 / 9525,
 			grid: true,
+			title: false, # works only for single-line charts
 			legend: {
 				position: 'r', # 'l', 'r', 'b', 't'
 			},

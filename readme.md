@@ -80,19 +80,20 @@ defaultOptions = {
   width: 5486400 / 9525,
   height: 3200400 / 9525,
   grid: true,
+  title: false,
   legend: {
-    position: 'r', # 'l', 'r', 'b', 't'
+    position: 'r', // 'l', 'r', 'b', 't'
   },
   axis: {
     x: {
-      orientation: 'minMax', # 'maxMin'
-      min: undefined, # number
+      orientation: 'minMax', // 'maxMin'
+      min: undefined, // number
       max: undefined,
-      type: undefined, # 'date'
+      type: undefined, // 'date'
       date: {
         format: 'unix',
-        code: 'mm/yy', # "m/yy;@"
-        unit: 'months', # "days"
+        code: 'mm/yy', // "m/yy;@"
+        unit: 'months', // "days"
         step: '1'
       }
     },
@@ -114,6 +115,9 @@ defaultOptions = {
 You can test that everything works fine using the command `mocha`. This will also create 3 docx files under the root directory that you can open to check if the docx are correct
 
 # Changelog
+
+### 0.2.0
+- title option, disabled by default
 
 ### 0.1.0
 - steps for date type

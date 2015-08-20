@@ -6,6 +6,7 @@ module.exports = class ChartMaker
 			<c:chartSpace xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
 				<c:lang val="ru-RU"/>
 				<c:chart>
+					#{if @options.title then "" else "<c:autoTitleDeleted val=\"1\"/>"}
 					<c:plotArea>
 						<c:layout/>
 						<c:lineChart>
@@ -23,14 +24,7 @@ module.exports = class ChartMaker
 				<c:idx val="#{i}"/>
 				<c:order val="#{i}"/>
 				<c:tx>
-					<c:strRef>
-						<c:strCache>
-							<c:ptCount val="1"/>
-							<c:pt idx="0">
-								<c:v>#{line.name}</c:v>
-							</c:pt>
-						</c:strCache>
-					</c:strRef>
+					<c:v>#{line.name}</c:v>
 				</c:tx>
 				<c:marker>
 					<c:symbol val="none"/>
