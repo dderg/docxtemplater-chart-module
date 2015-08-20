@@ -16,108 +16,60 @@ install this modile: `npm install docxtemplater-chart-module`
 
 Your docx should contain the text: `{$chart}`
 
-    ChartModule = require(‘docxtemplater-chart-module’)
+    var fs = require('fs');
+    var ChartModule = require(‘docxtemplater-chart-module’);
+    var chartModule = new ChartModule();
 
-    chartModule = new ChartModule()
-
-    docx = new DocxGen()
-        .attachModule(chartModule)
-        .load(content)
-        .setData({
-          chart: {
-            options: { # theese are defaults, no need to write them
-              width: 5486400 / 9525,
-              height: 3200400 / 9525,
-              legend: {
-                position: 'r', # 'l', 'r', 'b', 't'
-              },
-              axis: {
-                x: {
-                  orientation: 'minMax', # 'maxMin'
-                  min: undefined, # number
-                  max: undefined
+    var docx = new DocxGen()
+      .attachModule(chartModule)
+      .load(content)
+      .setData({
+        chart: {
+          lines: [
+            {
+              name: 'line 1',
+              data: [
+                {
+                  x: 'day 1',
+                  y: '4.3'
                 },
-                y: {
-                  orientation: 'minMax',
-                  mix: undefined,
-                  max: undefined
+                {
+                  x: 'day 2',
+                  y: '2.5'
+                },
+                {
+                  x: 'day 3',
+                  y: '3.5'
                 }
-              }
+              ]
+            },
+            {
+              name: 'line 2',
+              data: [
+                {
+                  x: 'day 1',
+                  y: '2.4'
+                },
+                {
+                  x: 'day 2',
+                  y: '4.4'
+                },
+                {
+                  x: 'day 3',
+                  y: '1.8'
+                }
+              ]
             }
-            lines: [
-              {
-                name: 'line 1',
-                data: [
-                  {
-                    x: 'day 1',
-                    y: '4.3'
-                  },
-                  {
-                    x: 'day 2',
-                    y: '2.5'
-                  },
-                  {
-                    x: 'day 3',
-                    y: '3.5'
-                  },
-                  {
-                    x: 'day 4',
-                    y: '4.5'
-                  }
-                ]
-              },
-              {
-                name: 'line 2',
-                data: [
-                  {
-                    x: 'day 1',
-                    y: '2.4'
-                  },
-                  {
-                    x: 'day 2',
-                    y: '4.4000000000000004'
-                  },
-                  {
-                    x: 'day 3',
-                    y: '1.8'
-                  },
-                  {
-                    x: 'day 4',
-                    y: '2.8'
-                  }
-                ]
-              },
-              {
-                name: 'line 3',
-                data: [
-                  {
-                    x: 'day 1',
-                    y: '2'
-                  },
-                  {
-                    x: 'day 2',
-                    y: '2'
-                  },
-                  {
-                    x: 'day 3',
-                    y: '3'
-                  },
-                  {
-                    x: 'day 4',
-                    y: '5'
-                  }
-                ]
-              }
-            ]
-          }
-        })
-        .render()
+          ]
+        }
+      })
+      .render();
 
-    buffer= docx
-            .getZip()
-            .generate({type:"nodebuffer"})
+    var buffer = docx
+      .getZip()
+      .generate({type:"nodebuffer"});
 
-    fs.writeFile("test.docx",buffer);
+    fs.writeFile("test.docx", buffer);
 
 # Options
 
