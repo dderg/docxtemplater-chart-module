@@ -108,6 +108,12 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 0.0.9
+- type 'date' support
+- time format in 'unix' or '1900' (amount of days since 1900)
+- units for steps on axis
+- formatCode for like i.e: 'd/m/yy' or 'm/yyyy'
+
 ### 0.0.8
 - grid option
 

@@ -799,7 +799,8 @@ describe 'date type with unix timestapm', () ->
 							type: 'date', # can be 'date', 'normal'
 							date: {
 								format: 'unix',
-								code: 'm/d/yyyy'
+								code: 'm/yyyy',
+								unit: 'days'
 							}
 						}
 					}

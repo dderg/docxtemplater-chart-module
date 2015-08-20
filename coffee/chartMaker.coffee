@@ -11,6 +11,12 @@ module.exports = class ChartMaker
 						<c:lineChart>
 							<c:grouping val="standard"/>
 		"""
+
+	getFormatCode: () ->
+		if @options.axis.x.type == 'date'
+			return "<c:formatCode>m/d/yyyy</c:formatCode>" 
+		else 
+			return ""
 	getLineTemplate: (line, i) ->
 		result = """
 			<c:ser>
@@ -30,9 +36,12 @@ module.exports = class ChartMaker
 					<c:symbol val="none"/>
 				</c:marker>
 				<c:cat>
-					<c:strRef>
-						<c:strCache>
+
+					<c:#{@ref}>
+						<c:#{@cache}>
+							#{@getFormatCode()}
 							<c:ptCount val="#{line.data.length}"/>
+				
 		"""
 		for elem, i in line.data
 			result += """
@@ -41,8 +50,8 @@ module.exports = class ChartMaker
 				</c:pt>
 			"""
 		result += """
-						</c:strCache>
-					</c:strRef>
+						</c:#{@cache}>
+					</c:#{@ref}>
 				</c:cat>
 				<c:val>
 					<c:numRef>
@@ -73,34 +82,60 @@ module.exports = class ChartMaker
 			#{if opts.min != undefined then "<c:min val=\"#{opts.min}\"/>" else ""}
 		</c:scaling>
 		"""
-
-	getTemplateBottom: () ->
+	getAxOpts: () ->
 		return """
+		<c:axId val="#{@id1}"/>
+		#{@getScaling(@options.axis.x)}
+		<c:axPos val="b"/>
+		<c:tickLblPos val="nextTo"/>
+		<c:txPr>
+			<a:bodyPr/>
+			<a:lstStyle/>
+			<a:p>
+				<a:pPr>
+					<a:defRPr sz="800"/>
+				</a:pPr>
+				<a:endParaRPr lang="ru-RU"/>
+			</a:p>
+		</c:txPr>
+		<c:crossAx val="#{@id2}"/>
+		<c:crosses val="autoZero"/>
+		<c:auto val="1"/>
+		<c:lblOffset val="100"/>
+		"""
+	getCatAx: () ->
+		return """
+		<c:catAx>
+			#{@getAxOpts()}
+			<c:lblAlgn val="ctr"/>
+		</c:catAx>
+		"""
+	getDateAx: () ->
+		return """
+		<c:dateAx>
+			#{@getAxOpts()}
+			<c:delete val="0"/>
+			<c:numFmt formatCode="#{@options.axis.x.date.code}" sourceLinked="0"/>
+			<c:majorTickMark val="out"/>
+			<c:minorTickMark val="none"/>
+			<c:baseTimeUnit val="days"/>
+			<c:majorUnit val="1"/>
+			<c:majorTimeUnit val="#{@options.axis.x.date.unit}"/>
+		</c:dateAx>
+		"""
+	getTemplateBottom: () ->
+		result = """
 							<c:marker val="1"/>
 							<c:axId val="#{@id1}"/>
 							<c:axId val="#{@id2}"/>
 						</c:lineChart>
-						<c:catAx>
-							<c:axId val="#{@id1}"/>
-							#{@getScaling(@options.axis.x)}
-							<c:axPos val="b"/>
-							<c:tickLblPos val="nextTo"/>
-							<c:crossAx val="#{@id2}"/>
-							<c:crosses val="autoZero"/>
-							<c:auto val="1"/>
-							<c:txPr>
-								<a:bodyPr/>
-								<a:lstStyle/>
-								<a:p>
-									<a:pPr>
-										<a:defRPr sz="500"/>
-									</a:pPr>
-									<a:endParaRPr lang="ru-RU"/>
-								</a:p>
-							</c:txPr>
-							<c:lblAlgn val="ctr"/>
-							<c:lblOffset val="100"/>
-						</c:catAx>
+		"""
+		switch @options.axis.x.type
+			when 'date'
+				result += @getDateAx()
+			else
+				result += @getCatAx()
+		result += """
 						<c:valAx>
 							<c:axId val="#{@id2}"/>
 							#{@getScaling(@options.axis.y)}
@@ -131,7 +166,14 @@ module.exports = class ChartMaker
 				</c:chart>
 			</c:chartSpace>
 		"""
+		return result
 	constructor: (@zip, @options) ->
+		if (@options.axis.x.type == 'date')
+			@ref = "numRef"
+			@cache = "numCache"
+		else
+			@ref = "strRef"
+			@cache = "strCache"
 			
 
 	makeChartFile: (lines) ->

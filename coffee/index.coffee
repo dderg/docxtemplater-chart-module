@@ -86,7 +86,8 @@ class ChartModule
 					type: undefined, # 'date'
 					date: {
 						format: 'unix',
-						code: 'm/d/yyyy'
+						code: 'm/yyyy', # "m/yy;@"
+						unit: 'months' # "days"
 					}
 				},
 				y: {
@@ -100,10 +101,18 @@ class ChartModule
 		result = deepMerge(result, options);
 		return result;
 
-	convertUnixTo1900: (chartData) ->
+
+	convertUnixTo1900: (chartData, axName) ->
+		unixTo1900 = (value) ->
+			return value / 86400 + 25569
+		convertOption = (name) ->
+			if (chartData.options.axis[axName][name])
+				chartData.options.axis[axName][name] = unixTo1900(chartData.options.axis[axName][name])
+		convertOption('min');
+		convertOption('max');
 		for line in chartData.lines
 			for data in line.data
-				data.x = data.x / 86400 + 25569
+				data[axName] = unixTo1900(data[axName])
 		return chartData
 
 	replaceTag: () ->
@@ -123,8 +132,10 @@ class ChartModule
 
 		options = @extendDefaults(chartData.options)
 
-		if options.xValuesType == 'date' and options.dateFormat == 'unix'
-			chartData = @convertUnixTo1900(chartData)
+		for name of options.axis
+			ax = options.axis[name]
+			if ax.type == 'date' and ax[ax.type].format == 'unix'
+				chartData = @convertUnixTo1900(chartData, name)
 
 		chart = new ChartMaker(gen.zip, options)
 		chart.makeChartFile(chartData.lines)
