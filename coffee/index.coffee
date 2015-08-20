@@ -106,7 +106,7 @@ class ChartModule
 
 	convertUnixTo1900: (chartData, axName) ->
 		unixTo1900 = (value) ->
-			return value / 86400 + 25569
+			return Math.round(value / 86400 + 25569)
 		convertOption = (name) ->
 			if (chartData.options.axis[axName][name])
 				chartData.options.axis[axName][name] = unixTo1900(chartData.options.axis[axName][name])
