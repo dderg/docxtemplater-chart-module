@@ -119,7 +119,7 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
-### 0.2.0
+### 0.2.1
 - bug fixes
 
 ### 0.2.0
