@@ -87,7 +87,14 @@ defaultOptions = {
     x: {
       orientation: 'minMax', # 'maxMin'
       min: undefined, # number
-      max: undefined
+      max: undefined,
+      type: undefined, # 'date'
+      date: {
+        format: 'unix',
+        code: 'mm/yy', # "m/yy;@"
+        unit: 'months', # "days"
+        step: '1'
+      }
     },
     y: {
       orientation: 'minMax',
