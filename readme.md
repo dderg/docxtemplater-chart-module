@@ -119,6 +119,32 @@ Your docx should contain the text: `{$chart}`
 
     fs.writeFile("test.docx",buffer);
 
+# Options
+
+## Defaults
+
+```
+defaultOptions = {
+  width: 5486400 / 9525,
+  height: 3200400 / 9525,
+  grid: true,
+  legend: {
+    position: 'r', # 'l', 'r', 'b', 't'
+  },
+  axis: {
+    x: {
+      orientation: 'minMax', # 'maxMin'
+      min: undefined, # number
+      max: undefined
+    },
+    y: {
+      orientation: 'minMax',
+      mix: undefined,
+      max: undefined
+    }
+  }
+}
+```
 
 # Building
 
