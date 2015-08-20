@@ -86,8 +86,9 @@ class ChartModule
 					type: undefined, # 'date'
 					date: {
 						format: 'unix',
-						code: 'm/yyyy', # "m/yy;@"
-						unit: 'months' # "days"
+						code: 'mm/yy', # "m/yy;@"
+						unit: 'months', # "days"
+						step: '1'
 					}
 				},
 				y: {

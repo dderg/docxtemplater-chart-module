@@ -108,6 +108,9 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 0.1.0
+- steps for date type
+
 ### 0.0.9
 - type 'date' support
 - time format in 'unix' or '1900' (amount of days since 1900)

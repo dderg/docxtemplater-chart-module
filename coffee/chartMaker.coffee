@@ -119,7 +119,7 @@ module.exports = class ChartMaker
 			<c:majorTickMark val="out"/>
 			<c:minorTickMark val="none"/>
 			<c:baseTimeUnit val="days"/>
-			<c:majorUnit val="1"/>
+			<c:majorUnit val="#{@options.axis.x.date.step}"/>
 			<c:majorTimeUnit val="#{@options.axis.x.date.unit}"/>
 		</c:dateAx>
 		"""

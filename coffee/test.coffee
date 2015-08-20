@@ -800,7 +800,8 @@ describe 'date type with unix timestapm', () ->
 							date: {
 								format: 'unix',
 								code: 'm/yyyy',
-								unit: 'days'
+								unit: 'days',
+								step: '2'
 							}
 						}
 					}
