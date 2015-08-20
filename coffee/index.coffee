@@ -82,7 +82,12 @@ class ChartModule
 				x: {
 					orientation: 'minMax', # 'maxMin'
 					min: undefined, # number
-					max: undefined
+					max: undefined,
+					type: undefined, # 'date'
+					date: {
+						format: 'unix',
+						code: 'm/d/yyyy'
+					}
 				},
 				y: {
 					orientation: 'minMax',
@@ -90,9 +95,6 @@ class ChartModule
 					max: undefined
 				}
 			}
-			xValuesType: 'normal', # 'normal', 'date'
-			dateFormat: 'unix' # 'unix', '1900'
-			dateFormatCode: 'm/d/yyyy' 
 		}
 		result = deepMerge({}, defaultOptions);
 		result = deepMerge(result, options);

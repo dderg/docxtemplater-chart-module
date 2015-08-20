@@ -794,8 +794,15 @@ describe 'date type with unix timestapm', () ->
 		.setData({
 			chart: {
 				options: {
-					xValuesType: 'date', # can be 'date', 'normal'
-					dateFormat: 'unix'
+					axis: {
+						x: {
+							type: 'date', # can be 'date', 'normal'
+							date: {
+								format: 'unix',
+								code: 'm/d/yyyy'
+							}
+						}
+					}
 				},
 				lines: [
 					{
