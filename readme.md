@@ -18,67 +18,67 @@ install this modile: `npm install docxtemplater-chart-module`
 # Usage
 
 Your docx should contain the text: `{$chart}`
+```javascript
+var fs = require('fs');
+var ChartModule = require(‘docxtemplater-chart-module’);
+var chartModule = new ChartModule();
 
-    var fs = require('fs');
-    var ChartModule = require(‘docxtemplater-chart-module’);
-    var chartModule = new ChartModule();
-
-    var docx = new DocxGen()
-      .attachModule(chartModule)
-      .load(content)
-      .setData({
-        chart: {
-          lines: [
+var docx = new DocxGen()
+  .attachModule(chartModule)
+  .load(content)
+  .setData({
+    chart: {
+      lines: [
+        {
+          name: 'line 1',
+          data: [
             {
-              name: 'line 1',
-              data: [
-                {
-                  x: 'day 1',
-                  y: '4.3'
-                },
-                {
-                  x: 'day 2',
-                  y: '2.5'
-                },
-                {
-                  x: 'day 3',
-                  y: '3.5'
-                }
-              ]
+              x: 'day 1',
+              y: '4.3'
             },
             {
-              name: 'line 2',
-              data: [
-                {
-                  x: 'day 1',
-                  y: '2.4'
-                },
-                {
-                  x: 'day 2',
-                  y: '4.4'
-                },
-                {
-                  x: 'day 3',
-                  y: '1.8'
-                }
-              ]
+              x: 'day 2',
+              y: '2.5'
+            },
+            {
+              x: 'day 3',
+              y: '3.5'
+            }
+          ]
+        },
+        {
+          name: 'line 2',
+          data: [
+            {
+              x: 'day 1',
+              y: '2.4'
+            },
+            {
+              x: 'day 2',
+              y: '4.4'
+            },
+            {
+              x: 'day 3',
+              y: '1.8'
             }
           ]
         }
-      })
-      .render();
+      ]
+    }
+  })
+  .render();
 
-    var buffer = docx
-      .getZip()
-      .generate({type:"nodebuffer"});
+var buffer = docx
+  .getZip()
+  .generate({type:"nodebuffer"});
 
-    fs.writeFile("test.docx", buffer);
-
+fs.writeFile("test.docx", buffer);
+```
 # Options
 
 ## Defaults
 
-```
+```javascript
 defaultOptions = {
   width: 5486400 / 9525,
   height: 3200400 / 9525,
