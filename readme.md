@@ -7,7 +7,7 @@ this module has only simple usage yet, contact me on gnomdan@yandex.ru or @prog6
 [![Build Status](https://travis-ci.org/prog666/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/prog666/docxtemplater-chart-module)
 [![Download count](https://img.shields.io/npm/dm/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
 [![Current tag](https://img.shields.io/npm/v/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
-[![Issues closed](http://issuestats.com/github/prog666/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/open-xml-templating/docxtemplater-chart-module)
+[![Issues closed](http://issuestats.com/github/prog666/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/prog666/docxtemplater-chart-module)
 
 # Installation:
 
