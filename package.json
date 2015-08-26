@@ -1,6 +1,6 @@
 {
   "name": "docxtemplater-chart-module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Chart Module for docxtemplater v1.0",
   "main": "js/index.js",
   "scripts": {
