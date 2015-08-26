@@ -112,7 +112,7 @@ class ChartModule
 				chartData.options.axis[axName][name] = unixTo1900(chartData.options.axis[axName][name])
 		convertOption('min');
 		convertOption('max');
-		for line in chartData?.lines?
+		for line in chartData.lines
 			for data in line.data
 				data[axName] = unixTo1900(data[axName])
 		return chartData

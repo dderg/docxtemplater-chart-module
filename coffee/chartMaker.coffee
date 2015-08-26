@@ -172,7 +172,7 @@ module.exports = class ChartMaker
 
 	makeChartFile: (lines) ->
 		result = @getTemplateTop()
-		for line, i in lines?
+		for line, i in lines
 			result += @getLineTemplate(line, i)
 		result += @getTemplateBottom()
 		@chartContent = result
