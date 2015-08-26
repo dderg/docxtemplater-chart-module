@@ -7,7 +7,7 @@ this module has only simple usage yet, contact me on gnomdan@yandex.ru or @prog6
 [![Build Status](https://travis-ci.org/prog666/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/prog666/docxtemplater-chart-module)
 [![Download count](https://img.shields.io/npm/dm/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
 [![Current tag](https://img.shields.io/npm/v/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
-[![Issues closed](http://issuestats.com/github/prog666/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/open-xml-templating/docxtemplater-chart-module)
+[![Issues closed](http://issuestats.com/github/prog666/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/prog666/docxtemplater-chart-module)
 
 # Installation:
 
@@ -18,67 +18,67 @@ install this modile: `npm install docxtemplater-chart-module`
 # Usage
 
 Your docx should contain the text: `{$chart}`
+```javascript
+var fs = require('fs');
+var ChartModule = require(‘docxtemplater-chart-module’);
+var chartModule = new ChartModule();
 
-    var fs = require('fs');
-    var ChartModule = require(‘docxtemplater-chart-module’);
-    var chartModule = new ChartModule();
-
-    var docx = new DocxGen()
-      .attachModule(chartModule)
-      .load(content)
-      .setData({
-        chart: {
-          lines: [
+var docx = new DocxGen()
+  .attachModule(chartModule)
+  .load(content)
+  .setData({
+    chart: {
+      lines: [
+        {
+          name: 'line 1',
+          data: [
             {
-              name: 'line 1',
-              data: [
-                {
-                  x: 'day 1',
-                  y: '4.3'
-                },
-                {
-                  x: 'day 2',
-                  y: '2.5'
-                },
-                {
-                  x: 'day 3',
-                  y: '3.5'
-                }
-              ]
+              x: 'day 1',
+              y: '4.3'
             },
             {
-              name: 'line 2',
-              data: [
-                {
-                  x: 'day 1',
-                  y: '2.4'
-                },
-                {
-                  x: 'day 2',
-                  y: '4.4'
-                },
-                {
-                  x: 'day 3',
-                  y: '1.8'
-                }
-              ]
+              x: 'day 2',
+              y: '2.5'
+            },
+            {
+              x: 'day 3',
+              y: '3.5'
+            }
+          ]
+        },
+        {
+          name: 'line 2',
+          data: [
+            {
+              x: 'day 1',
+              y: '2.4'
+            },
+            {
+              x: 'day 2',
+              y: '4.4'
+            },
+            {
+              x: 'day 3',
+              y: '1.8'
             }
           ]
         }
-      })
-      .render();
+      ]
+    }
+  })
+  .render();
 
-    var buffer = docx
-      .getZip()
-      .generate({type:"nodebuffer"});
+var buffer = docx
+  .getZip()
+  .generate({type:"nodebuffer"});
 
-    fs.writeFile("test.docx", buffer);
-
+fs.writeFile("test.docx", buffer);
+```
 # Options
 
 ## Defaults
 
-```
+```javascript
 defaultOptions = {
   width: 5486400 / 9525,
   height: 3200400 / 9525,
