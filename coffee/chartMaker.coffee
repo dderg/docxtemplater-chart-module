@@ -117,6 +117,17 @@ module.exports = class ChartMaker
 			<c:majorTimeUnit val="#{@options.axis.x.date.unit}"/>
 		</c:dateAx>
 		"""
+	getBorder: () ->
+		unless @options.border
+			return """
+				<c:spPr>
+					<a:ln>
+						<a:noFill/>
+					</a:ln>
+				</c:spPr>
+			"""
+		else
+			return ''
 	getTemplateBottom: () ->
 		result = """
 							<c:marker val="1"/>
@@ -158,6 +169,7 @@ module.exports = class ChartMaker
 					</c:legend>
 					<c:plotVisOnly val="1"/>
 				</c:chart>
+				#{@getBorder()}
 			</c:chartSpace>
 		"""
 		return result

@@ -75,6 +75,7 @@ class ChartModule
 			width: 5486400 / 9525,
 			height: 3200400 / 9525,
 			grid: true,
+			border: true,
 			title: false, # works only for single-line charts
 			legend: {
 				position: 'r', # 'l', 'r', 'b', 't'
@@ -158,7 +159,7 @@ class ChartModule
 			<w:drawing>
 				<wp:inline distB="0" distL="0" distR="0" distT="0">
 					<wp:extent cx="#{width}" cy="#{height}"/>
-					<wp:effectExtent b="0" l="19050" r="19050" t="0"/>
+					<wp:effectExtent b="0" l="0" r="0" t="0"/>
 					<wp:docPr id="1" name="Диаграмма 1"/>
 					<wp:cNvGraphicFramePr/>
 					<a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">

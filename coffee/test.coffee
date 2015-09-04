@@ -26,7 +26,7 @@ for name in fileNames
 	docX[name]=new DocxGen()
 	docX[name].loadedContent=content
 
-describe 'adding with {$ chart} syntax', ()->
+describe 'adding with {$ chart} syntax', () ->
 	name = 'chartExample.docx'
 	chartModule = new ChartModule()
 	docX[name].attachModule(chartModule)
@@ -37,6 +37,7 @@ describe 'adding with {$ chart} syntax', ()->
 				options: {
 					width: 300,
 					height: 200,
+					border: false,
 					legend: {
 						position: 'l' # can be 'r'
 					}

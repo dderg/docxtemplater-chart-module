@@ -83,6 +83,7 @@ defaultOptions = {
   width: 5486400 / 9525,
   height: 3200400 / 9525,
   grid: true,
+  border: true,
   title: false,
   legend: {
     position: 'r', // 'l', 'r', 'b', 't'
@@ -118,6 +119,9 @@ defaultOptions = {
 You can test that everything works fine using the command `mocha`. This will also create 3 docx files under the root directory that you can open to check if the docx are correct
 
 # Changelog
+
+### 0.3.0
+- Border option, enabled by default
 
 ### 0.2.1
 - bug fixes
