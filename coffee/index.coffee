@@ -125,7 +125,9 @@ class ChartModule
 
 		tag = templaterState.textInsideTag.substr(1) # tag to be replaced
 		chartData = scopeManager.getValueFromScope(tag) # data to build chart from
-		filename = tag
+		# create a unique filename so we can have multiple charts from one tag, via the loop functionality in docxtemplater
+		# Note the +1 isn't really required, it just makes the number the same as the associated rel, handy for debugging the resulting docx	
+		filename = tag + (this.chartManager.maxRid + 1);
 
 
 		imageRels = @chartManager.loadChartRels()
