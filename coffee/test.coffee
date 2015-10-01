@@ -4,6 +4,7 @@ expect = require('chai').expect
 
 fileNames = [
 	'chartExample.docx',
+	'loopChartExample.docx',
 	'dateExample.docx',
 	'multipleChartsExample.docx'
 ]
@@ -117,11 +118,11 @@ describe 'adding with {$ chart} syntax', () ->
 		expect(relsFile?).to.equal(true)
 		relsFileContent = relsFile.asText()
 		expect(relsFileContent).to.equal("""
-			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings" Target="webSettings.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart.xml"/></Relationships>
+			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings" Target="webSettings.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart6.xml"/></Relationships>
 		""")
 
 	it 'should create chart file without min and max in scaling', () ->
-		chartFile = zip.files['word/charts/chart.xml']
+		chartFile = zip.files['word/charts/chart6.xml']
 		expect(chartFile?).to.equal(true)
 		chartFileContent = chartFile.asText()
 		expect(chartFileContent).to.contain("c:orientation")
@@ -133,14 +134,188 @@ describe 'adding with {$ chart} syntax', () ->
 		expect(typeFile?).to.equal(true)
 		typeFileContent = typeFile.asText()
 		expect(typeFileContent).to.equal("""
-			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="wmf" ContentType="image/x-wmf"/><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/><Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/><Override PartName="/word/webSettings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml" PartName="/word/charts/chart.xml"/></Types>
+			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="wmf" ContentType="image/x-wmf"/><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/><Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/><Override PartName="/word/webSettings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml" PartName="/word/charts/chart6.xml"/></Types>
 		""")
-		
-	
+
+
 
 
 
 	fs.writeFile('test.docx', zip.generate({type:"nodebuffer"}));
+
+describe 'adding with {$ chart} syntax inside a loop', () ->
+	name = 'loopChartExample.docx'
+	chartModule = new ChartModule()
+	docX[name].attachModule(chartModule)
+	out = docX[name]
+	.load(docX[name].loadedContent)
+	.setData({
+			subsidiaries: [
+				{
+					title: "Euro Giant Ltd",
+					chart: {
+						options: {
+							width: 300,
+							height: 200,
+							border: false,
+							legend: {
+								position: 'l' # can be 'r'
+							}
+						},
+						lines: [
+							{
+								name: 'Product A',
+								data: [
+									{
+										x: 'Jan',
+										y: '14.5'
+									},
+									{
+										x: 'Feb',
+										y: '12.5'
+									},
+									{
+										x: 'Mar',
+										y: '13.5'
+									}
+								]
+							},
+							{
+								name: 'Product B',
+								data: [
+									{
+										x: 'Jan',
+										y: '32.4'
+									},
+									{
+										x: 'Feb',
+										y: '34.4000000000000004'
+									},
+									{
+										x: 'Mar',
+										y: '31.8'
+									}
+								]
+							},
+							{
+								name: 'Product C',
+								data: [
+									{
+										x: 'Jan',
+										y: '32'
+									},
+									{
+										x: 'Feb',
+										y: '22'
+									},
+									{
+										x: 'Mar',
+										y: '35'
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					title: "USA Giant Inc",
+					chart: {
+						options: {
+							width: 300,
+							height: 200,
+							border: false,
+							legend: {
+								position: 'l' # can be 'r'
+							}
+						},
+						lines: [
+							{
+								name: 'Product A',
+								data: [
+									{
+										x: 'Jan',
+										y: '15'
+									},
+									{
+										x: 'Feb',
+										y: '25'
+									},
+									{
+										x: 'Mar',
+										y: '12'
+									}
+								]
+							},
+							{
+								name: 'Product B',
+								data: [
+									{
+										x: 'Jan',
+										y: '7'
+									},
+									{
+										x: 'Feb',
+										y: '8.5'
+									},
+									{
+										x: 'Mar',
+										y: '27'
+									}
+								]
+							},
+							{
+								name: 'Product C',
+								data: [
+									{
+										x: 'Jan',
+										y: '20'
+									},
+									{
+										x: 'Feb',
+										y: '18'
+									},
+									{
+										x: 'Mar',
+										y: '22'
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+
+		})
+	.render()
+	zip = out.getZip()
+
+	it 'should create two relationships in rels file', () ->
+		relsFile = zip.files['word/_rels/document.xml.rels']
+		expect(relsFile?).to.equal(true)
+		relsFileContent = relsFile.asText()
+		expect(relsFileContent).to.equal("""
+			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/><Relationship Id="rId2" Type="http://schemas.microsoft.com/office/2007/relationships/stylesWithEffects" Target="stylesWithEffects.xml"/><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings" Target="webSettings.xml"/><Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart7.xml"/><Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart" Target="charts/chart8.xml"/></Relationships>
+		""")
+
+	it 'should create two separate chart files', () ->
+		chartFile1 = zip.files['word/charts/chart7.xml']
+		expect(chartFile1?).to.equal(true)
+		chartFile2 = zip.files['word/charts/chart8.xml']
+		expect(chartFile2?).to.equal(true)
+
+	it 'should add content type', () ->
+		typeFile = zip.files['[Content_Types].xml']
+		expect(typeFile?).to.equal(true)
+		typeFileContent = typeFile.asText()
+		expect(typeFileContent).to.equal("""
+			<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/stylesWithEffects.xml" ContentType="application/vnd.ms-word.stylesWithEffects+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/><Override PartName="/word/webSettings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml"/><Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/><Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/><Override ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml" PartName="/word/charts/chart7.xml"/><Override ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml" PartName="/word/charts/chart8.xml"/></Types>
+		""")
+
+
+
+
+
+	fs.writeFile('looptest.docx', zip.generate({type:"nodebuffer"}));
 
 describe 'multiple charts adding', () ->
 	name = 'multipleChartsExample.docx'
