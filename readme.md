@@ -120,6 +120,9 @@ You can test that everything works fine using the command `mocha`. This will als
 
 # Changelog
 
+### 1.0.0
+- Chart creation in loop contributed by colmben
+
 ### 0.3.0
 - Border option, enabled by default
 
