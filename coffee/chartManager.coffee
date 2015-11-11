@@ -22,7 +22,7 @@ module.exports = class ChartManager
 
 		file = loadFile("word/_rels/#{@endFileName}.xml.rels") || loadFile("word/_rels/document.xml.rels") #duct tape hack, doesn't work otherwise
 		return if file == undefined
-		content = DocUtils.decode_utf8(file.asText())
+		content = DocUtils.decodeUtf8(file.asText())
 		@xmlDoc = DocUtils.Str2xml(content)
 		RidArray = ((parseInt tag.getAttribute("Id").substr(3)) for tag in @xmlDoc.getElementsByTagName('Relationship')) #Get all Rids
 		@maxRid = DocUtils.maxArray(RidArray)
@@ -40,7 +40,7 @@ module.exports = class ChartManager
 		@_addChartRelationship(@maxRid, chartName);
 		@_addChartContentType(chartName);
 
-		@zip.file(@filePath, DocUtils.encode_utf8(DocUtils.xml2Str(@xmlDoc)), {})
+		@zip.file(@filePath, DocUtils.encodeUtf8(DocUtils.xml2Str(@xmlDoc)), {})
 		return @maxRid
 
 	###*
@@ -64,7 +64,7 @@ module.exports = class ChartManager
 	_addChartContentType: (name) ->
 		path = '[Content_Types].xml'
 		file = @zip.files[path]
-		content = DocUtils.decode_utf8(file.asText())
+		content = DocUtils.decodeUtf8(file.asText())
 		xmlDoc = DocUtils.Str2xml(content)
 		types = xmlDoc.getElementsByTagName("Types")[0]
 		newTag = xmlDoc.createElement('Override')
@@ -72,4 +72,4 @@ module.exports = class ChartManager
 		newTag.setAttribute('ContentType', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml')
 		newTag.setAttribute('PartName', "/word/charts/#{name}.xml")
 		types.appendChild(newTag)
-		@zip.file(path, DocUtils.encode_utf8(DocUtils.xml2Str(xmlDoc)), {})
+		@zip.file(path, DocUtils.encodeUtf8(DocUtils.xml2Str(xmlDoc)), {})
