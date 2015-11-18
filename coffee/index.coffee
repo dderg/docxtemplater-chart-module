@@ -127,8 +127,7 @@ class ChartModule
 		chartData = scopeManager.getValueFromScope(tag) # data to build chart from
 
 		# exit gracefully if no chartData, required when outer loop data doesn't exist
-		# note getValueFromScope actually returns a string called 'undefined' - argg!
-		return if (chartData=='undefined')
+		return if (!chartData?)
 
 		# create a unique filename so we can have multiple charts from one tag, via the loop functionality in docxtemplater
 		# Note the +1 isn't really required, it just makes the number the same as the associated rel, handy for debugging the resulting docx	
