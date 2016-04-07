@@ -151,7 +151,7 @@ class ChartModule
 		chart.writeFile(filename)
 		
 		
-		tagXml = @manager.getInstance('xmlTemplater').tagXml
+		tagXml = @manager.getInstance('xmlTemplater').fileTypeConfig.tagsXmlArray[0]
 
 		newText = @getChartXml({
 			chartID: chartId,
