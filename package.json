@@ -25,7 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/dderg/docxtemplater-chart-module.git"
   },
-  "author": "Danila Dergachev <gnomdan@yandex.ru>",
+  "author": "Danila Dergachev <dderg@protonmail.com>",
   "license": "MIT",
   "dependencies": {
     "docxtemplater": "^2.1.0",
