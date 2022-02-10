@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prog666/docxtemplater-chart-module.git"
+    "url": "git+https://github.com/dderg/docxtemplater-chart-module.git"
   },
   "author": "Danila Dergachev <gnomdan@yandex.ru>",
   "license": "MIT",
@@ -34,9 +34,9 @@
     "xmldom": "^0.1.19"
   },
   "bugs": {
-    "url": "https://github.com/prog666/docxtemplater-chart-module/issues"
+    "url": "https://github.com/dderg/docxtemplater-chart-module/issues"
   },
-  "homepage": "https://github.com/prog666/docxtemplater-chart-module#readme",
+  "homepage": "https://github.com/dderg/docxtemplater-chart-module#readme",
   "directories": {
     "example": "examples",
     "test": "test"

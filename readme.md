@@ -1,9 +1,9 @@
 Chart module for docxtemplater.
 
-[![Build Status](https://travis-ci.org/prog666/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/prog666/docxtemplater-chart-module)
+[![Build Status](https://travis-ci.org/dderg/docxtemplater-chart-module.svg?branch=master)](https://travis-ci.org/dderg/docxtemplater-chart-module)
 [![Download count](https://img.shields.io/npm/dm/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
 [![Current tag](https://img.shields.io/npm/v/docxtemplater-chart-module.svg?style=flat)](https://www.npmjs.org/package/docxtemplater-chart-module)
-[![Issues closed](http://issuestats.com/github/prog666/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/prog666/docxtemplater-chart-module)
+[![Issues closed](http://issuestats.com/github/dderg/docxtemplater-chart-module/badge/issue?style=flat)](http://issuestats.com/github/dderg/docxtemplater-chart-module)
 
 # Installation:
 
